@@ -1,0 +1,11 @@
+.map {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  background-color: aquamarine;
+  height: 600px;
+  width: 600px;
+}
+
+.cell  {
+  border: solid;
+}

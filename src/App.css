@@ -6,26 +6,40 @@
 }
 
 .cell {
-  width: 250px;
-  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
   background-color: aquamarine;
-  margin: 20px;
+  margin: 2px;
 }
 .Warrior {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
+  border-radius: 25px;
   background-color: rgb(214, 47, 47);
-  margin: 5px;
+  /* margin: 5px; */
 }
 .Wizard {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
+  border-radius: 25px;
   background-color: rgb(42, 118, 165);
-  margin: 5px;
+  /* margin: 5px; */
 }
 .Rogue {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
+  border-radius: 25px;
   background-color: rgb(59, 159, 9);
-  margin: 5px;
+  /* margin: 5px; */
+}
+
+.board {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
+  /* background-color: aquamarine; */
+  height: auto;
+  width: auto;
 }

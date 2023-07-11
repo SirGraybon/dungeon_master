@@ -13,6 +13,8 @@ const cellDATA = [
     id: "A",
     content: [
       { id: 1, characterName: "Bim", class: "Wizard", color: "#9c362d" },
+      { id: 2, characterName: "Bam", class: "Warrior", color: "#424959" },
+      { id: 3, characterName: "Bom", class: "Rogue", color: "#273c1d" },
     ],
   },
   { id: "B", content: [] },
@@ -22,7 +24,7 @@ const cellDATA = [
 ];
 
 function App() {
-  const [players, setPlayers] = useState(playerDATA);
+  // const [players, setPlayers] = useState(playerDATA);
   const [cells, setCells] = useState(cellDATA);
 
   //HandleDrag Function
@@ -40,15 +42,20 @@ function App() {
     }
     if (source.droppableId !== destination.droppableId) {
       const newData = [...cells];
-      const destCoord = results.destination.index;
-      newData[destCoord].content.push(players[source.index]);
+      const sourceCell = newData.findIndex(cell => cell.id === source.droppableId)
+      const destCell = newData.findIndex(cell => cell.id === destination.droppableId)
+      const destIndex = destination.index
+      const [moving] = newData[sourceCell].content.splice(source.index, 1)
+      newData[destCell].content.splice(destIndex, 0, moving)
+      console.log(newData)
+
       return setCells(newData);
     }
   };
 
   return (
     <DragDropContext onDragEnd={handleDrag}>
-      <Droppable droppableId="source" type="cell">
+      {/* <Droppable droppableId="source" type="cell">
         {(provided) => (
           <div
             className="cell"
@@ -75,65 +82,59 @@ function App() {
             })}
           </div>
         )}
-      </Droppable>
-
-
+      </Droppable> */}
 
       {cells.map((cell) => {
-        const index = 0
-        if(cell.content.length === 1){
-        return(
-          
-          <Droppable droppableId={cell.id} key={cell.id} type="cell">
-          {(provided) => (
-            <div
-            className="cell"
-            {...provided.droppableProps}
-            ref={provided.innerRef}
-            >
-                <Draggable
-                key={cell.content[0].id}
-                draggableId={cell.content[0].characterName}
-                index={index}
+        // const index = 0;
+        // if (cell.content.length > 0) {
+          return (
+            <Droppable droppableId={cell.id} key={cell.id} type="cell">
+              {(provided) => (
+                <div
+                  className="cell"
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
                 >
+                  {cell.content.map((player, index) => {
+                    return(
+
+                      <Draggable
+                      key={player.id}
+                      draggableId={player.characterName}
+                      index={index}
+                      >
                   {(provided) => (
                     <div
-                    className={cell.content[0].class}
+                    className={player.class}
                     {...provided.dragHandleProps}
                     {...provided.draggableProps}
                     ref={provided.innerRef}
                     ></div>
                     )}
                 </Draggable>
-                {provided.placeholder}
-            </div>
-      )}
-              
-      
-        </Droppable>
-        )} else {
-          return(
-            <Droppable droppableId={cell.id} key={cell.id} type="cell">
-            {(provided) => (
-              <div
-              className="cell"
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-              >
+                    )
+                  })}
                   {provided.placeholder}
-              </div>
-        )}
-                
-        
-          </Droppable>
-          )
-        }
-        
-        
-        
-        
-        })}
-    
+                </div>
+              )}
+            </Droppable>
+          );
+        // } else {
+        //   return (
+        //     <Droppable droppableId={cell.id} key={cell.id} type="cell">
+        //       {(provided) => (
+        //         <div
+        //           className="cell"
+        //           {...provided.droppableProps}
+        //           ref={provided.innerRef}
+        //         >
+        //           {provided.placeholder}
+        //         </div>
+        //       )}
+        //     </Droppable>
+        //   );
+        // }
+      })}
     </DragDropContext>
   );
 }

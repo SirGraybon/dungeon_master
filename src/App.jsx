@@ -1,17 +1,8 @@
 import { useState } from "react";
 import "./App.css";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import DATA from "./data/data";
 
-const DATA = {
-
-  playerDATA: [
-    { id: 1, characterName: "Bim", class: "Wizard", color: "#9c362d" },
-    { id: 2, characterName: "Bam", class: "Warrior", color: "#424959" },
-    { id: 3, characterName: "Bom", class: "Rogue", color: "#273c1d" },
-  ],
-  
- cellDATA: []
-}
 
 for (let i = 0; i < 400; i++) {
   DATA.cellDATA.push({ id: `${i}`, content: [] });
@@ -79,26 +70,36 @@ function App() {
             >
               {players.map((player, index) => {
                 return (
+                  <div className="playerInfo">
+                    <div className="tokenArea">
+
                   <Draggable
                     key={player.characterName}
                     draggableId={player.characterName}
                     index={index}
-                  >
+                    >
                     {(provided) => (
-                      <div
-                        className={player.class}
-                        {...provided.dragHandleProps}
-                        {...provided.draggableProps}
-                        ref={provided.innerRef}
-                      ></div>
-                    )}
+                      <img src={player.avatar}
+                      className={player.class}
+                      {...provided.dragHandleProps}
+                      {...provided.draggableProps}
+                      ref={provided.innerRef}
+                      ></img>
+                      )}
                   </Draggable>
+                      </div>
+                      </div>
                 );
               })}
           {provided.placeholder}
             </div>
           )}
         </Droppable>
+
+
+
+
+        {/* PLAYERGRID */}
         <div className="board">
           {cells.map((cell) => {
             // const index = 0;
@@ -119,12 +120,12 @@ function App() {
                           index={index}
                         >
                           {(provided) => (
-                            <div
+                            <img src={player.avatar}
                               className={player.class}
                               {...provided.dragHandleProps}
                               {...provided.draggableProps}
                               ref={provided.innerRef}
-                            ></div>
+                            ></img>
                           )}
                         </Draggable>
                       );

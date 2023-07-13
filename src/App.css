@@ -4,15 +4,19 @@
   padding: 2rem;
   text-align: center;
 }
-.source {
+
+
+/* Board */
+
+.playArea {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* justify-content: center; */
-  width: 550px;
-  height: 500px;
-  background-color: aquamarine;
-  margin: 2px;
+}
+.board {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
+  /* background-color: aquamarine; */
+  height: auto;
+  width: auto;
 }
 .cell {
   display: flex;
@@ -23,6 +27,13 @@
   background-color: aquamarine;
   margin: 2px;
 }
+
+
+
+
+/* Tokens */
+
+
 .Warrior {
   width: 40px;
   height: 40px;
@@ -30,17 +41,8 @@
   background-color: rgb(214, 47, 47);
   /* margin: 5px; */
 }
-.playerCard {
-  display: flex;
-  margin:5px;
-  width: 90%;
-  height: 65px;
-  border-radius: 5px;
-  background-color: rgb(214, 47, 47);
-  /* margin: 5px; */
-}
 .Wizard {
-
+  
   width: 40px;
   height: 40px;
   border-radius: 25px;
@@ -62,16 +64,30 @@
   /* margin: 5px; */
 }
 
-.board {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
-  /* background-color: aquamarine; */
-  height: auto;
-  width: auto;
-}
 
-.playArea {
+
+
+
+/* playerList */
+.source {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 550px;
+  height: 500px;
+  background-color: aquamarine;
+  margin: 2px;
+}
+.playerCard {
+  display: flex;
+  justify-content: space-between;
+  margin:5px;
+  width: 90%;
+  height: 65px;
+  border-radius: 5px;
+  background-color: rgb(214, 47, 47);
+  /* margin: 5px; */
 }
 .tokenArea {
   display: flex;
@@ -80,8 +96,17 @@
   background-color: aqua;
   height: 50px;
   width: 50px;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
-.avatar {
-  position: relative;
+.playerInfo {
+  display: flex;
+  flex-direction: column;
+  background-color: aqua;
+  
+}
+.playerStatus {
+  display: flex;
+  flex-direction: column;
+  background-color: aqua;
+  
 }

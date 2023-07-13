@@ -10,13 +10,13 @@ for (let i = 0; i < 400; i++) {
 function App() {
   // const [players, setPlayers] = useState(DATA.playerDATA);
   // const [cells, setCells] = useState(DATA.cellDATA);
-  const [data, setData] = useState(DATA)
+  const [data, setData] = useState(DATA);
 
   //HandleDrag Function
   const handleDrag = function (results) {
-    console.log(results)
+    console.log(results);
     const { source, destination, type } = results;
-    const newData = {...data};
+    const newData = { ...data };
     const destCell = newData.cellDATA.findIndex(
       (cell) => cell.id === destination.droppableId
     );
@@ -30,16 +30,16 @@ function App() {
       const sourceIndex = newData.playerDATA.findIndex(
         (player) => player.characterName === results.draggableId
       );
-      console.log(sourceIndex)
-      const currentLocation = newData.playerDATA[sourceIndex].location
-      
+      console.log(sourceIndex);
+      const currentLocation = newData.playerDATA[sourceIndex].location;
+
       const token = newData.playerDATA[source.index];
       newData.cellDATA[destCell].content.push(token);
       if (currentLocation > 0) {
-        newData.cellDATA[currentLocation].content = []
+        newData.cellDATA[currentLocation].content = [];
       }
-      newData.playerDATA[sourceIndex].location = destCell
-      console.log(newData)
+      newData.playerDATA[sourceIndex].location = destCell;
+      console.log(newData);
       return setData(newData);
     }
 
@@ -53,72 +53,82 @@ function App() {
         (cell) => cell.id === source.droppableId
       );
 
-      const [moving] = newData.cellDATA[sourceCell].content.splice(source.index, 1);
+      const [moving] = newData.cellDATA[sourceCell].content.splice(
+        source.index,
+        1
+      );
       newData.cellDATA[destCell].content.splice(destIndex, 0, moving);
 
       return setData(newData);
     }
-
   };
-
-
-
-
 
   ////////////////////////////  FUNCTION RETURN ////////////////////////////////
   return (
     <DragDropContext onDragEnd={handleDrag}>
       <div className="playArea">
-        <Droppable droppableId="source" type="cell" isDropDisabled={true}>
-          {(provided) => (
-            <div
-              className="source"
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-            >
-              {data.playerDATA.map((player, index) => {
-                return (
-                  <div className="playerCard">
-                    <div className="tokenArea">
+        <div className="source">
+          {data.playerDATA.map((player, index) => {
+            return (
+              <div className="playerCard">
+                <Droppable
+                  droppableId="source"
+                  type="cell"
+                  isDropDisabled={true}
+                >
+                  {(provided) => (
+                    <div
+                      className="tokenArea"
+                      {...provided.droppableProps}
+                      ref={provided.innerRef}
+                    >
                       <Draggable
                         key={player.characterName}
                         draggableId={player.characterName}
                         index={index}
                       >
                         {(provided) => (
-
                           <img
                             src={player.avatar}
                             className={player.class}
                             {...provided.dragHandleProps}
                             {...provided.draggableProps}
                             ref={provided.innerRef}
-                            ></img>
+                          ></img>
                         )}
                       </Draggable>
+                      {/* {provided.placeholder} */}
                     </div>
-                    <div className="playerInfo">
-
-                    </div>
-                  </div>
-                );
-              })}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
+                  )}
+                </Droppable>
+                <div className="playerInfo">
+                  <h4>{player.characterName}</h4>
+                  <h4>{player.characterName}</h4>
+                </div>
+                <div className="playerStatus">
+                  <h4>{player.characterName}</h4>
+                  <h4>{player.characterName}</h4>
+                </div>
+              </div>
+            );
+          })}
+        </div>
 
         <div className="board">
           {data.cellDATA.map((cell) => {
             // const index = 0;
             // if (cell.content.length > 0) {
             return (
-              <Droppable droppableId={cell.id} key={cell.id} type="cell" isDropDisabled={cell.content.length}>
+              <Droppable
+                droppableId={cell.id}
+                key={cell.id}
+                type="cell"
+                isDropDisabled={cell.content.length}
+              >
                 {(provided) => (
                   <div
                     className="cell"
                     {...provided.droppableProps}
-                    
                     ref={provided.innerRef}
                   >
                     {cell.content.map((player, index) => {

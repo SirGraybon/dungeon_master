@@ -14,7 +14,7 @@ function App() {
 
   //HandleDrag Function
   const handleDrag = function (results) {
-
+    console.log(results)
     const { source, destination, type } = results;
     const newData = {...data};
     const destCell = newData.cellDATA.findIndex(
@@ -27,9 +27,19 @@ function App() {
       destination.droppableId !== "source" &&
       source.droppableId === "source"
     ) {
+      const sourceIndex = newData.playerDATA.findIndex(
+        (player) => player.characterName === results.draggableId
+      );
+      console.log(sourceIndex)
+      const currentLocation = newData.playerDATA[sourceIndex].location
       
       const token = newData.playerDATA[source.index];
       newData.cellDATA[destCell].content.push(token);
+      if (currentLocation > 0) {
+        newData.cellDATA[currentLocation].content = []
+      }
+      newData.playerDATA[sourceIndex].location = destCell
+      console.log(newData)
       return setData(newData);
     }
 
@@ -68,7 +78,7 @@ function App() {
             >
               {data.playerDATA.map((player, index) => {
                 return (
-                  <div className="playerInfo">
+                  <div className="playerCard">
                     <div className="tokenArea">
                       <Draggable
                         key={player.characterName}
@@ -76,7 +86,6 @@ function App() {
                         index={index}
                       >
                         {(provided) => (
-                          <div>
 
                           <img
                             src={player.avatar}
@@ -85,9 +94,11 @@ function App() {
                             {...provided.draggableProps}
                             ref={provided.innerRef}
                             ></img>
-                            </div>
                         )}
                       </Draggable>
+                    </div>
+                    <div className="playerInfo">
+
                     </div>
                   </div>
                 );
@@ -107,6 +118,7 @@ function App() {
                   <div
                     className="cell"
                     {...provided.droppableProps}
+                    
                     ref={provided.innerRef}
                   >
                     {cell.content.map((player, index) => {

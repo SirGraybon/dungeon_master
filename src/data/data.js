@@ -5,9 +5,9 @@ import rogue from "../assets/avatars/thief.png"
 const DATA = {
 
   playerDATA: [
-    { id: 1, characterName: "Bim", class: "Wizard", avatar: wizard, loaction: 0 },
-    { id: 2, characterName: "Bam", class: "Warrior", avatar: warrior, loaction: 0 },
-    { id: 3, characterName: "Bom", class: "Rogue", avatar: rogue, loaction: 0 },
+    { id: 1, characterName: "Bim", class: "Wizard", avatar: wizard, location: 0 },
+    { id: 2, characterName: "Bam", class: "Warrior", avatar: warrior, location: 0 },
+    { id: 3, characterName: "Bom", class: "Rogue", avatar: rogue, location: 0 },
   ],
   
  cellDATA: []

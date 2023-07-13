@@ -30,10 +30,10 @@
   background-color: rgb(214, 47, 47);
   /* margin: 5px; */
 }
-.playerInfo {
+.playerCard {
   display: flex;
   margin:5px;
-  width: 80%;
+  width: 90%;
   height: 65px;
   border-radius: 5px;
   background-color: rgb(214, 47, 47);
@@ -72,4 +72,16 @@
 
 .playArea {
   display: flex;
+}
+.tokenArea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: aqua;
+  height: 50px;
+  width: 50px;
+  overflow: hidden;
+}
+.avatar {
+  position: relative;
 }

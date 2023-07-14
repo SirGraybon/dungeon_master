@@ -100,13 +100,19 @@
 }
 .playerInfo {
   display: flex;
+  align-items: flex-start;
   flex-direction: column;
   background-color: aqua;
+  width: 200px;
   
 }
 .playerStatus {
   display: flex;
   flex-direction: column;
   background-color: aqua;
+  width: auto;
   
+}
+.playerName {
+  margin: 0px;
 }

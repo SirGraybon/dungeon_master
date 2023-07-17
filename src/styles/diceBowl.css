@@ -1,0 +1,21 @@
+.diceBowlComponent {
+  display: flex;
+  background-color: aquamarine;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 750px;
+  height: 550px;
+  margin: 2px;
+}
+.dice_options {
+  display: flex;
+  justify-content: space-between;
+  width: 750px;
+  height: 120px;
+  background-color: rgb(56, 135, 109);
+  
+}
+.dice_option {
+  width: 120px;
+  background-color: rgb(227, 234, 232);
+}

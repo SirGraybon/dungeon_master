@@ -9,11 +9,13 @@ function App() {
   // const [players, setPlayers] = useState(DATA.playerDATA);
   // const [cells, setCells] = useState(DATA.cellDATA);
   const [data, setData] = useState(DATA);
-
-  //HandleDrag Function
+  const [modalPlayer, setModalPlayer] = useState('DiceBowl')
+  
+  ////////////////////////////  HANDLE DRAG FUNCTION ///////////////////////////
   const handleDrag = function (results) {
     console.log(results);
     const { source, destination, type } = results;
+    if (!destination ) return;
     const newData = { ...data };
     const destCell = newData.cellDATA.findIndex(
       (cell) => cell.id === destination.droppableId
@@ -41,35 +43,36 @@ function App() {
       return setData(newData);
     }
 
-    //Dropping out of bounds: result - no action
-    if (!destination) return;
+   //droppin in same cell: result - rearange
+   if (source.droppableId !== destination.droppableId) {
+    const sourceCell = newData.cellDATA.findIndex(
+      (cell) => cell.id === source.droppableId
+    );
 
-    //droppin in same cell: result - rearange
+    const [moving] = newData.cellDATA[sourceCell].content.splice(
+      source.index,
+      1
+    );
+    newData.cellDATA[destCell].content.splice(destIndex, 0, moving);
 
-    if (source.droppableId !== destination.droppableId) {
-      const sourceCell = newData.cellDATA.findIndex(
-        (cell) => cell.id === source.droppableId
-      );
+    return setData(newData);
+  }
 
-      const [moving] = newData.cellDATA[sourceCell].content.splice(
-        source.index,
-        1
-      );
-      newData.cellDATA[destCell].content.splice(destIndex, 0, moving);
-
-      return setData(newData);
-    }
   };
 
+
+  ////////////////////////////  CLOSE MODAL FUNCTION ///////////////////////////
+  const closeModal = function() {
+    setModalPlayer(false)
+  }
   ////////////////////////////  FUNCTION RETURN ////////////////////////////////
   return (
     <>
       <DragDropContext onDragEnd={handleDrag}>
-        <PlayArea data={data} />
+        <PlayArea data={data} modalPlayer={modalPlayer} setModalPlayer={setModalPlayer} />
       </DragDropContext>
-      <DragDropContext>
-        <PlayerDetails data={data}/>
-      </DragDropContext>
+
+
     </>
   );
 }

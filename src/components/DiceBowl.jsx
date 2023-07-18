@@ -30,12 +30,13 @@ const DiceBowl = function (props) {
         <div className="dice_option" onClick={() => addDie(20)}>
           20
         </div>
-        <div className="dice_option">12</div>
-        <div className="dice_option">10</div>
-        <div className="dice_option">8</div>
-        <div className="dice_option">6</div>
-        <div className="dice_option">4</div>
+        <div className="dice_option" onClick={() => addDie(12)}>12</div>
+        <div className="dice_option" onClick={() => addDie(10)}>10</div>
+        <div className="dice_option" onClick={() => addDie(8)}>8</div>
+        <div className="dice_option" onClick={() => addDie(6)}>6</div>
+        <div className="dice_option" onClick={() => addDie(4)}>4</div>
       </div>
+      <div className="total_roll"></div>
       <div className="dice_roll_area">
         {dice.map((die, index) => {
           return (

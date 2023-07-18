@@ -9,7 +9,8 @@ function App() {
   // const [players, setPlayers] = useState(DATA.playerDATA);
   // const [cells, setCells] = useState(DATA.cellDATA);
   const [data, setData] = useState(DATA);
-  const [modalPlayer, setModalPlayer] = useState('DiceBowl')
+  const [modalPlayer, setModalPlayer] = useState('')
+  const [modalType, setModalType] = useState("diceBowl")
   
   ////////////////////////////  HANDLE DRAG FUNCTION ///////////////////////////
   const handleDrag = function (results) {
@@ -69,7 +70,7 @@ function App() {
   return (
     <>
       <DragDropContext onDragEnd={handleDrag}>
-        <PlayArea data={data} modalPlayer={modalPlayer} setModalPlayer={setModalPlayer} />
+        <PlayArea data={data} modalPlayer={modalPlayer} setModalPlayer={setModalPlayer} modalType={modalType} setModalType={setModalType} />
       </DragDropContext>
 
 

@@ -12,17 +12,25 @@
 /* choose dice */
 .dice_options {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   width: 750px;
-  height: 130px;
+  height: 60px;
   background-color: rgb(56, 135, 109);
   
 }
 .dice_option {
   width: 120px;
-  height: 120px;
+  height: 60px;
   background-color: rgb(227, 234, 232);
+}
+
+/* totla roll */
+
+.total_roll {
+width: 750px;
+height: 60px;
+background-color: beige;
 }
 
 /* dice bowl */

@@ -3,8 +3,9 @@ import PlayerDetails from "./PlayerDetails";
 import DiceBowl from "./DiceBowl";
 
 const PlayArea = function (props) {
-  const { data, modalPlayer, setModalPlayer } = props;
+  const { data, modalPlayer, setModalPlayer, modalType, setModalType } = props;
   const handleClick = function (player) {
+    setModalType('player')
     setModalPlayer(player);
   };
   return (
@@ -108,8 +109,8 @@ const PlayArea = function (props) {
             );
           })}
         </div>
-{/* {modalPlayer && <PlayerDetails player={modalPlayer}/>} */}
-{modalPlayer === "DiceBowl" && <DiceBowl/>}
+{modalType === 'player' && <PlayerDetails player={modalPlayer}/>}
+{modalType === "diceBowl" && <DiceBowl/>}
         
       </div>
     </div>

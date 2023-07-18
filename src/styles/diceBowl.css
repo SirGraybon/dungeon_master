@@ -7,6 +7,9 @@
   height: 550px;
   margin: 2px;
 }
+
+
+/* choose dice */
 .dice_options {
   display: flex;
   justify-content: space-between;
@@ -20,4 +23,74 @@
   width: 120px;
   height: 120px;
   background-color: rgb(227, 234, 232);
+}
+
+/* dice bowl */
+
+.dice_roll_area {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr ;
+}
+
+
+/* dice in bowl */
+
+
+.not_rolled {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 170px;
+  height: 100px;
+  background-color: rgb(243, 133, 37);
+  border-radius: 10px;
+  padding: 3px;
+  margin: 5px;
+  margin-bottom: 25px;
+  transition: 0.3s;
+  z-index: 0;
+  font-size: 0;
+}
+.not_rolled:hover {
+  width: 220px;
+  background-color: rgb(243, 133, 37);
+  font-size: 10pt;
+}
+.rolled {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  width: 170px;
+  height: 100px;
+  background-color: #53e100;
+  border-radius: 10px;
+  padding: 3px;
+  margin: 5px;
+  margin-bottom: 25px;
+  transition: 0.3s;
+  font-size: 0;
+}
+
+.die_display_area {
+  width: 170px;
+  /* height: 100px; */
+  background-color: beige;
+  border-radius: 10px;
+  font-size: 12pt;
+  /* margin: 5px; */
+}
+.die_actions {
+display: flex;
+flex-direction: column;
+/* justify-content: space-between; */
+align-items: center;
+/* margin: 2px;
+padding: 2px; */
+
+}
+
+.roll {
+  cursor: pointer;
+  background-color: beige;
+  border-radius: 5px;
 }

@@ -11,6 +11,7 @@ function App() {
   const [data, setData] = useState(DATA);
   const [modalPlayer, setModalPlayer] = useState("diceBowl")
   const [modalType, setModalType] = useState()
+  const [log, setLog] = useState([])
   
   ////////////////////////////  HANDLE DRAG FUNCTION ///////////////////////////
   const handleDrag = function (results) {

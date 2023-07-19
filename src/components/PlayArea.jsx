@@ -10,6 +10,8 @@ const PlayArea = function (props) {
 
     setModalPlayer(player);
   };
+
+
   return (
     <div className="playArea">
 

@@ -2,7 +2,7 @@ import { useState } from "react";
 import "../styles/diceBowl.css";
 
 const DiceBowl = function (props) {
-  const [dice, setDice] = useState([]);
+  const {dice, setDice} = props;
 
   const addDie = function (d) {
     let keyCounter = dice.length;
@@ -36,7 +36,7 @@ const DiceBowl = function (props) {
         <div className="dice_option" onClick={() => addDie(6)}>6</div>
         <div className="dice_option" onClick={() => addDie(4)}>4</div>
       </div>
-      <div className="total_roll"></div>
+      {/* <div className="total_roll"></div> */}
       <div className="dice_roll_area">
         {dice.map((die, index) => {
           return (

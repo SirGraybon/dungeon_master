@@ -1,11 +1,13 @@
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import PlayerDetails from "./PlayerDetails";
 import DiceBowl from "./DiceBowl";
+import { useState } from "react";
 
 const PlayArea = function (props) {
   const { data, modalPlayer, setModalPlayer, modalType, setModalType } = props;
+  const [dice, setDice] = useState([]);
   const handleClick = function (player) {
-    setModalType('player')
+
     setModalPlayer(player);
   };
   return (
@@ -58,7 +60,7 @@ const PlayArea = function (props) {
       {/* ////////////////////////////////////PLAYER LIST AND INFO /////////////////////////////////// */}
 
 
-      <div>
+      <div className="information_center">
         <div className="source">
           {data.playerDATA.map((player, index) => {
             return (
@@ -109,8 +111,11 @@ const PlayArea = function (props) {
             );
           })}
         </div>
-{modalType === 'player' && <PlayerDetails player={modalPlayer}/>}
-{modalType === "diceBowl" && <DiceBowl/>}
+        <div className="option_bar">
+          <button onClick={() => handleClick("diceBowl")}> Dice Bowl</button>
+        </div>
+{modalPlayer !== "diceBowl" && <PlayerDetails player={modalPlayer}/>}
+{modalPlayer === "diceBowl" && <DiceBowl dice={dice} setDice={setDice}/>}
         
       </div>
     </div>

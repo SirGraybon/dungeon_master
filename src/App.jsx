@@ -9,8 +9,8 @@ function App() {
   // const [players, setPlayers] = useState(DATA.playerDATA);
   // const [cells, setCells] = useState(DATA.cellDATA);
   const [data, setData] = useState(DATA);
-  const [modalPlayer, setModalPlayer] = useState('')
-  const [modalType, setModalType] = useState("diceBowl")
+  const [modalPlayer, setModalPlayer] = useState("diceBowl")
+  const [modalType, setModalType] = useState()
   
   ////////////////////////////  HANDLE DRAG FUNCTION ///////////////////////////
   const handleDrag = function (results) {

@@ -29,7 +29,7 @@
   transition: 0.2s;
   
 }
-.cell:hover {
+/* .cell:hover {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,9 +38,24 @@
   background-color: rgb(229, 210, 67);
   margin: 1px;
 
+} */
+
+
+
+/* info center */
+
+.information_center {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 
+.option_bar {
+  width: 100%;
+  height: 50px;
+  background-color: rgb(180, 178, 178);
+}
 
 
 /* Tokens */
@@ -85,7 +100,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   width: 750px;
   height: 500px;
   background-color: aquamarine;

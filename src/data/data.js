@@ -3,7 +3,7 @@ import warrior from "../assets/avatars/barbarian.png";
 import rogue from "../assets/avatars/thief.png";
 import placeHolder from "../assets/items/potion.png";
 
-const DATA = {
+const data = {
   playerDATA: [
     {
       id: 1,
@@ -81,7 +81,7 @@ const DATA = {
 };
 
 for (let i = 0; i < 400; i++) {
-  DATA.cellDATA.push({ id: `${i}`, content: [] });
+  data.cellDATA.push({ id: `${i}`, content: [] });
 }
 
-export default DATA;
+export default data;

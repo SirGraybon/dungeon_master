@@ -7,18 +7,14 @@ const PlayArea = function (props) {
   const { data, modalPlayer, setModalPlayer, modalType, setModalType } = props;
   const [dice, setDice] = useState([]);
   const handleClick = function (player) {
-
     setModalPlayer(player);
   };
 
-
   return (
     <div className="playArea">
-
       {/* ///////////////////////////// PLAY BOARD /////////////////////////////////////////////// */}
       <div className="board">
         {data.cellDATA.map((cell) => {
-
           return (
             <Droppable
               droppableId={cell.id}
@@ -61,13 +57,13 @@ const PlayArea = function (props) {
 
       {/* ////////////////////////////////////PLAYER LIST AND INFO /////////////////////////////////// */}
 
-
       <div className="information_center">
         <div className="source">
           {data.playerDATA.map((player, index) => {
             return (
-              <div className="playerCard">
+              <div className="playerCard" key={player.name}>
                 <Droppable
+                  key={player.name}
                   droppableId="source"
                   type="cell"
                   isDropDisabled={true}
@@ -93,7 +89,7 @@ const PlayArea = function (props) {
                           ></img>
                         )}
                       </Draggable>
-                      
+
                       {/* {provided.placeholder} */}
                     </div>
                   )}
@@ -116,9 +112,10 @@ const PlayArea = function (props) {
         <div className="option_bar">
           <button onClick={() => handleClick("diceBowl")}> Dice Bowl</button>
         </div>
-{modalPlayer !== "diceBowl" && <PlayerDetails player={modalPlayer}/>}
-{modalPlayer === "diceBowl" && <DiceBowl dice={dice} setDice={setDice}/>}
-        
+        {modalPlayer !== "diceBowl" && <PlayerDetails player={modalPlayer} />}
+        {modalPlayer === "diceBowl" && (
+          <DiceBowl dice={dice} setDice={setDice} />
+        )}
       </div>
     </div>
   );

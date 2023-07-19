@@ -1,42 +1,16 @@
 import { useState } from "react";
 import "../styles/diceBowl.css";
+import StateHook from "../state/state";
 
 const DiceBowl = function (props) {
-  const { dice, setDice } = props;
+  const {addDie, state, rollDie, clearDice, rollAllDice} = StateHook()
 
-  // const rollTotal = dice.forEach(die => {
-  //   let total = total + die.result
-  // });
 
-  ////////////////////DICE FUNCTIONS////////////////////////////////////
-  const addDie = function (d) {
-    let keyCounter = dice.length;
-    const currentDice = [...dice];
 
-    if (currentDice.length < 9) {
+  // const clearDice = function () {
+  //   setDice([]);
+  // };
 
-      currentDice.push({
-        die_key: keyCounter,
-        die_type: d,
-        result: 0,
-        status: "not_rolled",
-      });
-    }
-
-    setDice(currentDice);
-  };
-
-  const clearDice = function () {
-    setDice([]);
-  };
-
-  const rollDie = function (index) {
-    const currentDice = [...dice];
-    let targetDie = currentDice[index];
-    targetDie.result = Math.floor(Math.random() * targetDie.die_type) + 1;
-    targetDie.status = "rolled";
-    setDice(currentDice);
-  };
 
   ////////////////////COMPONENT FUNCTION RETURN //////////////////////////////////////////////
   return (
@@ -63,7 +37,7 @@ const DiceBowl = function (props) {
       </div>
       {/* <div className="total_roll"></div> */}
       <div className="dice_roll_area">
-        {dice.map((die, index) => {
+        {state.dice.map((die, index) => {
           return (
             <div className={die.status} key={die.die_key}>
               <div className="die_display_area">
@@ -80,7 +54,11 @@ const DiceBowl = function (props) {
           );
         })}
       </div>
+      <div>
+
       <button onClick={() => clearDice()}> Clear Dice</button>
+      <button onClick={() => rollAllDice()}> Roll all Dice</button>
+      </div>
       {/* <div>{rollTotal}</div> */}
     </div>
   );

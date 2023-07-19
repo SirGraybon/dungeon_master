@@ -1,14 +1,14 @@
 import { useState } from "react";
 import "./App.css";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import DATA from "./data/data";
+import Data from "./data/data";
 import PlayArea from "./components/PlayArea";
 import PlayerDetails from "./components/PlayerDetails";
 
 function App() {
   // const [players, setPlayers] = useState(DATA.playerDATA);
   // const [cells, setCells] = useState(DATA.cellDATA);
-  const [data, setData] = useState(DATA);
+  const [data, setData] = useState(Data);
   const [modalPlayer, setModalPlayer] = useState("diceBowl")
   const [modalType, setModalType] = useState()
   const [log, setLog] = useState([])

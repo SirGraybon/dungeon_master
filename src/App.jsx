@@ -1,9 +1,12 @@
+////////////////////IMPORTs ////////////////////
 import { useState } from "react";
 import "./App.css";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import Data from "./data/data";
 import PlayArea from "./components/PlayArea";
 import PlayerDetails from "./components/PlayerDetails";
+import StateHook from "./state/state";
+import { StateProvider } from "./state/StateContext";
 
 function App() {
   // const [players, setPlayers] = useState(DATA.playerDATA);
@@ -69,13 +72,13 @@ function App() {
   }
   ////////////////////////////  FUNCTION RETURN ////////////////////////////////
   return (
-    <>
+    <StateProvider>
       <DragDropContext onDragEnd={handleDrag}>
         <PlayArea data={data} modalPlayer={modalPlayer} setModalPlayer={setModalPlayer} modalType={modalType} setModalType={setModalType} />
       </DragDropContext>
 
 
-    </>
+    </StateProvider>
   );
 }
 

@@ -1,9 +1,15 @@
-import { useState } from "react";
+////////////////////IMPORTs ////////////////////
 import "../styles/diceBowl.css";
-import StateHook from "../state/state";
+// import StateHook from "../state/state";
+import shareState from "../state/StateContext";
 
 const DiceBowl = function (props) {
-  const {addDie, state, rollDie, clearDice, rollAllDice} = StateHook()
+  // const {addDie, state, rollDie, clearDice, rollAllDice} = StateHook()
+  const {    addDie,
+    rollDie,
+    clearDice,
+    rollAllDice,
+    state,} = shareState()
 
 
 

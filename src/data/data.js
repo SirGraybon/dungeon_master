@@ -1,3 +1,4 @@
+////////////////////IMPORTs ////////////////////
 import wizard from "../assets/avatars/wizard2.png";
 import warrior from "../assets/avatars/barbarian.png";
 import rogue from "../assets/avatars/thief.png";

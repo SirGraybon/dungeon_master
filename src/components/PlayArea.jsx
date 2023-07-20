@@ -2,16 +2,19 @@
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import PlayerDetails from "./PlayerDetails";
 import DiceBowl from "./DiceBowl";
-import { useState } from "react";
+import shareState from "../state/StateContext";
 
 const PlayArea = function (props) {
-  const { data, modalPlayer, setModalPlayer, modalType, setModalType } = props;
-  const [dice, setDice] = useState([]);
+  const {data, handleDrag} = shareState()
+  const { modalPlayer, setModalPlayer,} = props;
+  // const data = state.data
+  // const [dice, setDice] = useState([]);
   const handleClick = function (player) {
     setModalPlayer(player);
   };
 
   return (
+    <DragDropContext onDragEnd={handleDrag}>
     <div className="playArea">
       {/* ///////////////////////////// PLAY BOARD /////////////////////////////////////////////// */}
       <div className="board">
@@ -48,7 +51,7 @@ const PlayArea = function (props) {
                       </Draggable>
                     );
                   })}
-                  {/* {provided.placeholder} */}
+                  {provided.placeholder}
                 </div>
               )}
             </Droppable>
@@ -91,7 +94,7 @@ const PlayArea = function (props) {
                         )}
                       </Draggable>
 
-                      {/* {provided.placeholder} */}
+                      {provided.placeholder}
                     </div>
                   )}
                 </Droppable>
@@ -115,10 +118,11 @@ const PlayArea = function (props) {
         </div>
         {modalPlayer !== "diceBowl" && <PlayerDetails player={modalPlayer} />}
         {modalPlayer === "diceBowl" && (
-          <DiceBowl dice={dice} setDice={setDice} />
+          <DiceBowl />
         )}
       </div>
     </div>
+    </DragDropContext>
   );
 };
 

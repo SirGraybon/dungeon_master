@@ -13,9 +13,7 @@ const DiceBowl = function (props) {
 
 
 
-  // const clearDice = function () {
-  //   setDice([]);
-  // };
+
 
 
   ////////////////////COMPONENT FUNCTION RETURN //////////////////////////////////////////////

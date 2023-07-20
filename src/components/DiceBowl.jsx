@@ -4,17 +4,7 @@ import "../styles/diceBowl.css";
 import shareState from "../state/StateContext";
 
 const DiceBowl = function (props) {
-  // const {addDie, state, rollDie, clearDice, rollAllDice} = StateHook()
-  const {    addDie,
-    rollDie,
-    clearDice,
-    rollAllDice,
-    state,} = shareState()
-
-
-
-
-
+  const { addDie, rollDie, clearDice, rollAllDice, state } = shareState();
 
   ////////////////////COMPONENT FUNCTION RETURN //////////////////////////////////////////////
   return (
@@ -59,9 +49,8 @@ const DiceBowl = function (props) {
         })}
       </div>
       <div>
-
-      <button onClick={() => clearDice()}> Clear Dice</button>
-      <button onClick={() => rollAllDice()}> Roll all Dice</button>
+        <button onClick={() => clearDice()}> Clear Dice</button>
+        <button onClick={() => rollAllDice()}> Roll all Dice</button>
       </div>
       {/* <div>{rollTotal}</div> */}
     </div>

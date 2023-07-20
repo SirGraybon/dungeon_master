@@ -1,14 +1,14 @@
-////////////////////IMPORTs ////////////////////
+////////////////////IMPORTs ////////////////////////////////////////////////////////////
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import PlayerDetails from "./PlayerDetails";
 import DiceBowl from "./DiceBowl";
 import shareState from "../state/StateContext";
 
 const PlayArea = function (props) {
-  const {data, handleDrag} = shareState()
+  ////////////////////STATE ////////////////////////////////////////////////////////////
+  const {data, handleDrag, display, setDisplay} = shareState()
   const { modalPlayer, setModalPlayer,} = props;
-  // const data = state.data
-  // const [dice, setDice] = useState([]);
+
   const handleClick = function (player) {
     setModalPlayer(player);
   };
@@ -98,7 +98,7 @@ const PlayArea = function (props) {
                     </div>
                   )}
                 </Droppable>
-                <div className="infoArea" onClick={() => handleClick(player)}>
+                <div className="infoArea" onClick={() => setDisplay("player", player)}>
                   <div className="playerInfo">
                     <p className="playerName">{player.characterName}</p>
                     <p>{player.class}</p>
@@ -114,10 +114,10 @@ const PlayArea = function (props) {
           })}
         </div>
         <div className="option_bar">
-          <button onClick={() => handleClick("diceBowl")}> Dice Bowl</button>
+          <button onClick={() => setDisplay("diceBowl", null)}> Dice Bowl</button>
         </div>
-        {modalPlayer !== "diceBowl" && <PlayerDetails player={modalPlayer} />}
-        {modalPlayer === "diceBowl" && (
+        {display === "player" && <PlayerDetails player={modalPlayer} />}
+        {display === "diceBowl" && (
           <DiceBowl />
         )}
       </div>

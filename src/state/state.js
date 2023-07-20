@@ -1,21 +1,21 @@
-////////////////////IMPORTs ////////////////////
+////////////////////IMPORTs ////////////////////////////////////////////////////////////
 import React, { useReducer } from "react";
 import data from "../data/data";
 
 // const StateHook = function () {
  export const defaultState = {
     data: data,
-    modalPlayer: "diceBowl",
-    modalType: "",
+    selectedPlayer: "diceBowl",
+    display: "",
     log: [],
     dice: [],
   };
 
-  ////////////////////REDUCER SWITCH CASEs////////////////////
+  ////////////////////REDUCER SWITCH CASEs////////////////////////////////////////////////////////////
  export const reducer = function (state, action) {
     switch (action.type) {
 
-////////////////////DICE////////////////////
+////////////////////DICE////////////////////////////////////////////////////////////
 case "EDIT_DICE": {
   let keyCounter = state.dice.length;
   const currentDice = [...state.dice];
@@ -51,12 +51,26 @@ case "EDIT_DICE": {
           dice: currentDice,
         };
       }
-      ////////////////////DICE////////////////////
+      ////////////////////DATA////////////////////////////////////////////////////////////
       case "UPDATE_DATA": {
         console.log(action.payload)
         return {
           ...state,
           data: action.payload
+        }
+      }
+      ////////////////////DISPLAY////////////////////////////////////////////////////////////
+      case "SET_DISPLAY": {
+        if (action.displayType !== "player"){
+          return {
+            ...state,
+            display: action.displayType
+          }
+        }
+        return {
+          ...state,
+          display: action.displayType,
+          selectedPlayer: action.player
         }
       }
     }

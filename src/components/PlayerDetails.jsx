@@ -1,37 +1,33 @@
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import "../styles/playerDetails.css";
+import shareState from "../state/StateContext";
 
 const PlayerDetails = function (props) {
-  const { player, setModalPlayer } = props;
-  console.log(player);
-
-  const handleClick = function () {
-    setModalPlayer(false);
-  };
+  const { selectedPlayer } = shareState();
 
   return (
     <div className="playerModal">
       <div className="playerDetails">
         <div className="playerDetailsSection">
-          <img className="avatar" src={player.avatar} alt="" />
+          <img className="avatar" src={selectedPlayer.avatar} alt="" />
           <p>
-            {player.characterName} | {player.class}
+            {selectedPlayer.characterName} | {selectedPlayer.class}
           </p>
           <p>
-            {player.current_health} / {player.max_health} HP
+            {selectedPlayer.current_health} / {selectedPlayer.max_health} HP
           </p>
         </div>
         <div className="playerDetailsSection">
-          <p> Dex: {player.stats.Dex} </p>
-          <p> Str: {player.stats.Str} </p>
-          <p> Con: {player.stats.Con} </p>
-          <p> Int: {player.stats.Int} </p>
-          <p> Chr: {player.stats.Chr} </p>
-          <p> Wis: {player.stats.Wis} </p>
+          <p> Dex: {selectedPlayer.stats.Dex} </p>
+          <p> Str: {selectedPlayer.stats.Str} </p>
+          <p> Con: {selectedPlayer.stats.Con} </p>
+          <p> Int: {selectedPlayer.stats.Int} </p>
+          <p> Chr: {selectedPlayer.stats.Chr} </p>
+          <p> Wis: {selectedPlayer.stats.Wis} </p>
         </div>
         <div className="playerDetailsSection">
-          <div>Level: {player.level}</div>
-          <div>Gold: {player.gold}</div>
+          <div>Level: {selectedPlayer.level}</div>
+          <div>Gold: {selectedPlayer.gold}</div>
         </div>
       </div>
       <DragDropContext onDragEnd={console.log("dragging")}>
@@ -42,7 +38,7 @@ const PlayerDetails = function (props) {
               {...provided.droppableProps}
               ref={provided.innerRef}
             >
-              {player.player_inventory.map((item, index) => {
+              {selectedPlayer.player_inventory.map((item, index) => {
                 return (
                   <Draggable
                     droppableId={item.item}
@@ -50,7 +46,8 @@ const PlayerDetails = function (props) {
                     index={index}
                   >
                     {(provided) => (
-                      <img title={item.item + ": " + item.description}  
+                      <img
+                        title={item.item + ": " + item.description}
                         key={item.item}
                         src={item.token}
                         className="inventoryItem"

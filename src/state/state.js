@@ -52,7 +52,7 @@ case "EDIT_DICE": {
         };
       }
       ////////////////////DICE////////////////////
-      case "UPDATE DATA": {
+      case "UPDATE_DATA": {
         console.log(action.payload)
         return {
           ...state,

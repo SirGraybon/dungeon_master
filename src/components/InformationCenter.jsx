@@ -43,7 +43,7 @@ export default function InformationCenter() {
                       )}
                     </Draggable>
 
-                    {provided.placeholder}
+                    {/* {provided.placeholder} */}
                   </div>
                 )}
               </Droppable>

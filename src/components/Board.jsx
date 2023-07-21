@@ -47,7 +47,7 @@ export default function Board() {
                         </Draggable>
                       );
                     })}
-                    {provided.placeholder}
+                    {/* {provided.placeholder} */}
                   </div>
                 )}
               </Droppable>

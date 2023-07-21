@@ -1,8 +1,8 @@
-import "../styles/adventureMap.css";
 import shareState from "../state/StateContext";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import DiceBowl from "./DiceBowl";
 import PlayerDetails from "./PlayerDetails";
+import "../App.css"
 
 export default function InformationCenter() {
   const { data, handleDrag, display, setDisplay } = shareState();

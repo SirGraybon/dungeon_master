@@ -1,13 +1,26 @@
-import shareState from "../state/StateContext"
+import shareState from "../state/StateContext";
+import "../styles/feed.css"
 
-const Feed = function(){
-const {feed} = shareState()
+const Feed = function () {
+  const { feed } = shareState();
 
-  return(
-feed.map((event) => {
-  return <p>{event.dateStamp} | {event.timeStamp} | {event.event}</p>
-})
-  )
-}
+  return (
+    <div className="feed">
+      {feed.map((event) => {
+        return (
+          <div className="feedItem">
+          <p >
+            {event.dateStamp} | {event.timeStamp} :   
+          </p>
 
-export default Feed
+          <p >
+             {event.event}
+          </p>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+export default Feed;

@@ -3,6 +3,8 @@ import wizard from "../assets/avatars/wizard2.png";
 import warrior from "../assets/avatars/barbarian.png";
 import rogue from "../assets/avatars/thief.png";
 import placeHolder from "../assets/items/potion.png";
+import grass from "../assets/terrain/grass.png"
+
 
 const data = {
   playerDATA: [
@@ -82,7 +84,7 @@ const data = {
 };
 
 for (let i = 0; i < 400; i++) {
-  data.cellDATA.push({ id: `${i}`, content: [] });
+  data.cellDATA.push({ id: `${i}`, content: [], background: grass });
 }
 
 export default data;

@@ -11,10 +11,10 @@ const PlayArea = function (props) {
   return (
     <DragDropContext onDragEnd={handleDrag}>
       <div className="playArea">
+      <Feed/>
         <Board />
         <InformationCenter />
       </div>
-      <Feed/>
     </DragDropContext>
   );
 };

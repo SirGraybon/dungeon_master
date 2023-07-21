@@ -11,13 +11,13 @@
 .playArea {
   display: flex;
 }
-.board {
+/* .board {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
   /* background-color: aquamarine; */
-  height: auto;
-  width: auto;
-}
+  /* height: auto;
+  width: auto; */
+/* }
 .cell {
   display: flex;
   align-items: center;
@@ -28,7 +28,7 @@
   margin: 2px;
   transition: 0.2s;
   
-}
+} */ */
 /* .cell:hover {
   display: flex;
   align-items: center;

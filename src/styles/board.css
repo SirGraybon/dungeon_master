@@ -1,0 +1,41 @@
+.board {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
+  background-color: aquamarine;
+  height: auto;
+  width: auto;
+}
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  /* background-color: aquamarine; */
+  /* margin: 2px; */
+  transition: 0.2s;
+  background-size: calc(100);
+  
+}
+/* .cell:hover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background-color: rgb(229, 210, 67);
+  margin: 1px;
+
+} */
+.innerCellHolder {
+  display: flex;
+}
+
+.horizontalPartition {
+  height: 1px;
+  background-color: rgba(176, 176, 176, 0.483);
+}
+.verticalPartition {
+  width: 1px;
+  background-color: rgba(176, 176, 176, 0.483);
+}

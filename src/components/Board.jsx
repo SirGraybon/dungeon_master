@@ -2,12 +2,13 @@ import "../styles/board.css";
 import shareState from "../state/StateContext";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import grass from "../assets/terrain/grass.png"
+import dirt from "../assets/terrain/dirt.png"
 
 export default function Board() {
-  const { data, handleDrag, display, setDisplay } = shareState();
+  const { data, handleDrag, display, setDisplay, editTerrain } = shareState();
   return (
     <div className="board">
-      {data.cellDATA.map((cell) => {
+      {data.cellDATA.map((cell, index) => {
         return (
           <div>
             <div className="horizontalPartition"></div>
@@ -25,6 +26,7 @@ export default function Board() {
                     {...provided.droppableProps}
                     ref={provided.innerRef}
                     style={{backgroundImage: `url(${cell.background})`}}
+                    onClick={() => editTerrain(index)}
                   >
                     {cell.content.map((player, index) => {
                       return (

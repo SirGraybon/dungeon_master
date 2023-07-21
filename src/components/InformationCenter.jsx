@@ -2,6 +2,7 @@ import shareState from "../state/StateContext";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import DiceBowl from "./DiceBowl";
 import PlayerDetails from "./PlayerDetails";
+import TerrainEditor from "./TerrainEditor";
 import "../App.css"
 
 export default function InformationCenter() {
@@ -66,9 +67,11 @@ export default function InformationCenter() {
       </div>
       <div className="option_bar">
         <button onClick={() => setDisplay("diceBowl", null)}> Dice Bowl</button>
+        <button onClick={() => setDisplay("terrain", null)}> Terrain Editor</button>
       </div>
       {display === "player" && <PlayerDetails />}
       {display === "diceBowl" && <DiceBowl />}
+      {display === "terrain" && <TerrainEditor />}
     </div>
   );
 }

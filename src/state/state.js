@@ -1,6 +1,9 @@
 ////////////////////IMPORTs ////////////////////////////////////////////////////////////
 import React, { useReducer } from "react";
 import data from "../data/data";
+import grass from "../assets/terrain/grass.png"
+import dirt from "../assets/terrain/dirt.png"
+
 
 // const StateHook = function () {
  export const defaultState = {
@@ -9,6 +12,8 @@ import data from "../data/data";
     display: "",
     feed: [],
     dice: [],
+    terrainOptions: [grass, dirt],
+    terrainBrush: null
   };
 
   ////////////////////DATE / TIME VARIABLEs////////////////////////////////////////////////////////////
@@ -95,6 +100,24 @@ case "EDIT_DICE": {
           selectedPlayer: action.player
         }
       }
+      ////////////////////TERRAIN////////////////////////////////////////////////////////////
+
+      case "EDIT_TERRAIN": {
+        const newData = {...state.data}
+        newData.cellDATA[action.payload].background = state.terrainBrush
+
+        return {
+          ...state,
+          data:newData
+        }
+
+      }
+      case "SET_TERRAIN_BRUSH":{
+        const brush = action.payload
+        return {...state,
+        terrainBrush: brush}
+      }
+
     }
   };
   

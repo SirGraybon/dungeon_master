@@ -15,6 +15,7 @@
   /* margin: 2px; */
   transition: 0.2s;
   background-size: calc(100);
+  border-radius: 5px;
   
 }
 /* .cell:hover {

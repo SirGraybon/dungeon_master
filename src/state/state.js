@@ -7,9 +7,26 @@ import data from "../data/data";
     data: data,
     selectedPlayer: "diceBowl",
     display: "",
-    log: [],
+    feed: [],
     dice: [],
   };
+
+  ////////////////////DATE / TIME VARIABLEs////////////////////////////////////////////////////////////
+  const months = ["placeholder", "Jan", "Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+  const date = new Date().getDate(); //To get the Current Date
+  const month = new Date().getMonth() + 1; //To get the Current Month
+  const year = new Date().getFullYear(); //To get the Current Year
+  const hours = new Date().getHours(); //To get the Current Hours
+  const min = new Date().getMinutes(); //To get the Current Minutes
+  const sec = new Date().getSeconds(); //To get the Current Secondsconsole.log(date)
+
+  const dateStamp = `${months[month]}, ${date} ${year}`
+  const timeStamp = `${hours}:${min}:${sec}`
+  console.log(dateStamp)
+  console.log(timeStamp)
+
+
+ 
 
   ////////////////////REDUCER SWITCH CASEs////////////////////////////////////////////////////////////
  export const reducer = function (state, action) {
@@ -43,12 +60,17 @@ case "EDIT_DICE": {
       
       case "ROLL_DIE": {
         const currentDice = [...state.dice];
+        const currentFeed = [...state.feed];
         let targetDie = currentDice[action.index];
         targetDie.result = Math.floor(Math.random() * targetDie.die_type) + 1;
+        const feedUpdate = {event:`User rolled a D${targetDie.die_type}. Result: ${targetDie.result}`,
+      dateStamp, timeStamp}
+        currentFeed.push(feedUpdate)
         targetDie.status = "rolled";
         return {
           ...state,
           dice: currentDice,
+          feed: currentFeed
         };
       }
       ////////////////////DATA////////////////////////////////////////////////////////////

@@ -87,10 +87,11 @@ export const StateProvider = ({ children }) => {
     rollAllDice,
     handleDrag,
     setDisplay,
-    data: state.data,
     state,
+    data: state.data,
     display: state.display,
     selectedPlayer: state.selectedPlayer,
+    feed: state.feed
   };
 
   return (

@@ -44,7 +44,7 @@ const data = {
       current_health: 100,
       gold: 0,
       player_inventory: [
-        {item: "Health Potion", uses: 1, unitWeight: 15, qty: 1, get totalWeight() {this.totalWeight = this.unitWeight * this.qty } , token: placeHolder, description: "Heals user for 25HP"},
+        {item: "Health Potion", item_type: "consumable", uses: 1, unitWeight: 15, qty: 1, get totalWeight() {this.totalWeight = this.unitWeight * this.qty } , token: placeHolder, description: "Heals user for 25HP"},
       ],
       stats: {
         Dex: 10,

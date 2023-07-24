@@ -8,13 +8,12 @@ const Feed = function () {
 
   const updateMessage = function (event) {
     setMessage(event.target.value);
-
   };
 
-  const prepPost = function() {
-    postMessage(message, "message")
-    setMessage("")
-  }
+  const prepPost = function () {
+    postMessage(message, "message");
+    setMessage("");
+  };
 
   return (
     <div className="feed">
@@ -22,11 +21,12 @@ const Feed = function () {
         {feed.map((event) => {
           return (
             <div className="feedItem">
-              <p>
-                {event.dateStamp} | {event.timeStamp} :
-              </p>
+              <div className="dateTime">
+                <div>{event.dateStamp} </div>
+                <div>{event.timeStamp} </div>
+              </div>
 
-              <p>{event.event}</p>
+              <content>| {event.event}</content>
             </div>
           );
         })}

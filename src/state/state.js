@@ -103,10 +103,10 @@ export const reducer = function (state, action) {
     case "POST_MESSAGE": {
       const currentFeed = [...state.feed];
       const feedUpdate = {
-        event: `user says: ${action.payload}.`,
-        dateStamp,
+        event: action.payload,
         timeStamp,
-        postType: action.postType
+        postType: action.postType,
+        user: state.user
 
       };
       currentFeed.push(feedUpdate);

@@ -29,7 +29,7 @@ export const StateProvider = ({ children }) => {
     const currentDice = [...state.dice];
     let targetDie = currentDice[index];
     targetDie.result = Math.floor(Math.random() * targetDie.die_type) + 1;
-    const feedUpdate = `User rolled a D${targetDie.die_type}. Result: ${targetDie.result}`;
+    const feedUpdate = ` rolled a D${targetDie.die_type}. Result: ${targetDie.result}`;
     postMessage(feedUpdate, "diceRoll")
     targetDie.status = "rolled";
     dispatch({ type: "ROLL_DIE", payload: currentDice });

@@ -4,28 +4,28 @@ import "../styles/diceBowl.css";
 import shareState from "../state/StateContext";
 
 const DiceBowl = function (props) {
-  const { addDie, rollDie, clearDice, rollAllDice, state } = shareState();
+  const { editDice, rollDie, clearDice, rollAllDice, state } = shareState();
 
   ////////////////////COMPONENT FUNCTION RETURN //////////////////////////////////////////////
   return (
     <div className="diceBowlComponent">
       <div className="dice_options">
-        <div className="dice_option" onClick={() => addDie(20)}>
+        <div className="dice_option" onClick={() => editDice(20)}>
           20
         </div>
-        <div className="dice_option" onClick={() => addDie(12)}>
+        <div className="dice_option" onClick={() => editDice(12)}>
           12
         </div>
-        <div className="dice_option" onClick={() => addDie(10)}>
+        <div className="dice_option" onClick={() => editDice(10)}>
           10
         </div>
-        <div className="dice_option" onClick={() => addDie(8)}>
+        <div className="dice_option" onClick={() => editDice(8)}>
           8
         </div>
-        <div className="dice_option" onClick={() => addDie(6)}>
+        <div className="dice_option" onClick={() => editDice(6)}>
           6
         </div>
-        <div className="dice_option" onClick={() => addDie(4)}>
+        <div className="dice_option" onClick={() => editDice(4)}>
           4
         </div>
       </div>
@@ -49,7 +49,7 @@ const DiceBowl = function (props) {
         })}
       </div>
       <div>
-        <button onClick={() => clearDice()}> Clear Dice</button>
+        <button onClick={() => editDice("XX")}> Clear Dice</button>
         <button onClick={() => rollAllDice()}> Roll all Dice</button>
       </div>
       {/* <div>{rollTotal}</div> */}

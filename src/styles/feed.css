@@ -1,4 +1,16 @@
+
+
 .feed {
+  display: flex;
+  background-color: aquamarine;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 400px;
+  /* height: 525px; */
+  /* margin: 2px; */
+}
+.feedLog {
   display: flex;
   background-color: aquamarine;
   flex-direction: column;

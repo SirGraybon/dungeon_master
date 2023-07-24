@@ -4,6 +4,7 @@ import "../styles/playerDetails.css";
 import shareState from "../state/StateContext";
 import Inventory from "./Inventory";
 import Equipment from "./Equipment";
+import Skills from "./Skills";
 
 const PlayerDetails = function (props) {
   const [sideView, setSideview] = useState("inventory");
@@ -37,9 +38,11 @@ const PlayerDetails = function (props) {
         </div>
         {sideView === "inventory" && <Inventory />}
         {sideView === "equipment" && <Equipment />}
+        {sideView === "skills" && <Skills/>}
         <div className="tabs">
           <button onClick={() => handleClick("inventory")}>Inv</button>
           <button onClick={() => handleClick("equipment")}>Eqp</button>
+          <button onClick={() => handleClick("skills")}>Skl</button>
         </div>
       </div>
     </div>

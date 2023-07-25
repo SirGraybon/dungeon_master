@@ -40,10 +40,7 @@ const hours = new Date().getHours(); //To get the Current Hours
 const min = new Date().getMinutes(); //To get the Current Minutes
 const sec = new Date().getSeconds(); //To get the Current Secondsconsole.log(date)
 
-const dateStamp = `${months[month]}, ${day} ${year}`;
-const timeStamp = `${hours}:${min}:${sec}`;
-console.log(dateStamp);
-console.log(timeStamp);
+
 
 ////////////////////REDUCER SWITCH CASEs////////////////////////////////////////////////////////////
 export const reducer = function (state, action) {
@@ -55,7 +52,7 @@ export const reducer = function (state, action) {
         dice: action.payload,
       };
     }
-
+    
     case "ROLL_DIE": {
       return {
         ...state,
@@ -85,11 +82,11 @@ export const reducer = function (state, action) {
       };
     }
     ////////////////////TERRAIN////////////////////////////////////////////////////////////
-
+    
     case "EDIT_TERRAIN": {
       const newData = { ...state.data };
       newData.cellDATA[action.payload].background = state.terrainBrush;
-
+      
       return {
         ...state,
         data: newData,
@@ -101,15 +98,23 @@ export const reducer = function (state, action) {
     }
     ////////////////////FEED////////////////////////////////////////////////////////////
     case "POST_MESSAGE": {
+      let dateStamp = `${months[month]}, ${day} ${year}`;
+      let timeStamp = `${hours}:${min}:${sec}`;
       const currentFeed = [...state.feed];
       const feedUpdate = {
         event: action.payload,
-        timeStamp,
+        time: timeStamp,
         postType: action.postType,
-        user: state.user
-
+        user: state.user,
       };
-      currentFeed.push(feedUpdate);
+      const todayIndex = currentFeed.findIndex(item => item.day === dateStamp)
+      console.log(todayIndex)
+      if (todayIndex === -1) {
+        currentFeed.push({day: dateStamp, feed: [feedUpdate]});
+        
+      } else {
+        currentFeed[todayIndex].feed.push(feedUpdate)
+      }
       return {
         ...state,
         feed: currentFeed,

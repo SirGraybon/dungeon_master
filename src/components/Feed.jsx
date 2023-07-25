@@ -5,6 +5,7 @@ import "../styles/feed.css";
 const Feed = function () {
   const [message, setMessage] = useState("");
   const { feed, postMessage } = shareState();
+  console.log(feed)
 
   const updateMessage = function (event) {
     setMessage(event.target.value);
@@ -21,12 +22,15 @@ const Feed = function () {
         {feed.map((event) => {
           return (
             <div className="feedItem">
-              <div className="dateTime">
-                <div>{event.dateStamp} </div>
-                <div>{event.timeStamp} </div>
-              </div>
+              <div> -- {event.day} -- </div>
+              {event.feed.map((item) => {
+                return (
+                  <div>
+                    <div>{item.time} : {item.user} {item.event} </div>
 
-              <content>| {event.event}</content>
+                  </div>
+                );
+              })}
             </div>
           );
         })}

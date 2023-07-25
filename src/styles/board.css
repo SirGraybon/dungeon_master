@@ -1,9 +1,12 @@
 .board {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
-  background-color: aquamarine;
+  background-color: rgba(133, 66, 7, 0.303);
   height: auto;
   width: auto;
+  margin: 2px;
+  border-radius: 15px;
+  overflow: hidden;
 }
 .cell {
   display: flex;
@@ -15,7 +18,8 @@
   /* margin: 2px; */
   transition: 0.2s;
   background-size: calc(100);
-  border-radius: 5px;
+  border-radius: 3px;
+  overflow: hidden;
   
 }
 /* .cell:hover {
@@ -34,9 +38,9 @@
 
 .horizontalPartition {
   height: 1px;
-  background-color: rgba(176, 176, 176, 0.483);
+  /* background-color: rgba(176, 176, 176, 0.483); */
 }
 .verticalPartition {
   width: 1px;
-  background-color: rgba(176, 176, 176, 0.483);
+  /* background-color: rgba(176, 176, 176, 0.483); */
 }

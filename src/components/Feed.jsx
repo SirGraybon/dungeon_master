@@ -5,7 +5,7 @@ import "../styles/feed.css";
 const Feed = function () {
   const [message, setMessage] = useState("");
   const { feed, postMessage } = shareState();
-  console.log(feed)
+  console.log(feed);
 
   const updateMessage = function (event) {
     setMessage(event.target.value);
@@ -24,12 +24,23 @@ const Feed = function () {
             <div className="feedItem">
               <div> -- {event.day} -- </div>
               {event.feed.map((item) => {
-                return (
-                  <div>
-                    <div>{item.time} : {item.user} {item.event} </div>
-
-                  </div>
-                );
+                if (item.postType !== "message") {
+                  return (
+                    <div className="lineItem">
+                      <div>[ {item.time} ] </div>
+                      <div className="user">{item.user} </div>
+                      <div className="content"> {item.event} </div>
+                    </div>
+                  );
+                } else {
+                  return (
+                    <div className="lineItem">
+                      <div>[ {item.time} ] </div>
+                      <div className="user">{item.user} says: </div>
+                      <div> "{item.event}" </div>
+                    </div>
+                  );
+                }
               })}
             </div>
           );
@@ -37,11 +48,12 @@ const Feed = function () {
       </div>
       <div className="textInput">
         <textarea
+        className="chatBox"
           name="message"
           value={message}
           onChange={updateMessage}
         ></textarea>
-        <button onClick={() => prepPost()}></button>
+        <button className="sendMessageButton" onClick={() => prepPost()}>⇉</button>
       </div>
     </div>
   );

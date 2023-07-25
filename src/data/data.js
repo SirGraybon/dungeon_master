@@ -45,6 +45,8 @@ const data = {
       gold: 0,
       player_inventory: [
         {item: "Health Potion", item_type: "consumable", uses: 1, unitWeight: 15, qty: 1, get totalWeight() {this.totalWeight = this.unitWeight * this.qty } , token: placeHolder, description: "Heals user for 25HP"},
+        {item: "leather helmet", item_type: "head", uses: 1, unitWeight: 15, qty: 1, get totalWeight() {this.totalWeight = this.unitWeight * this.qty } , token: placeHolder, description: "leather helmet"},
+        {item: "metal chest plate", item_type: "torso", uses: 1, unitWeight: 15, qty: 1, get totalWeight() {this.totalWeight = this.unitWeight * this.qty } , token: placeHolder, description: "metal chest plate"},
       ],
       stats: {
         Dex: 10,

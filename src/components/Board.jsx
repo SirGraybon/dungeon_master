@@ -3,6 +3,7 @@ import shareState from "../state/StateContext";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import grass from "../assets/terrain/grass.png"
 import dirt from "../assets/terrain/dirt.png"
+import wall from "../assets/terrain/wall.png"
 
 export default function Board() {
   const { data, handleDrag, display, setDisplay, editTerrain } = shareState();
@@ -13,7 +14,8 @@ export default function Board() {
           <div>
             <div className="horizontalPartition"></div>
             <div className="innerCellHolder">
-              <div className="verticalPartition"></div>
+              <div className="verticalPartition" >
+              </div>
               <Droppable
                 droppableId={cell.id}
                 key={cell.id}

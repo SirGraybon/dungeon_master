@@ -7,7 +7,7 @@ const Equipment = function () {
   const right = ["gloves", "right", "boots"];
   const center = ["head", "torso", "belt", "legs"];
   const left = ["amulet", "left", "ring"];
-  const [equipCat, setEquipCat] = useState("head");
+  const [equipCat, setEquipCat] = useState(null);
   const { selectedPlayer } = shareState();
 
   const handleClick = function(selection){
@@ -73,33 +73,35 @@ const Equipment = function () {
             })}
           </div>
         </div>
+{equipCat !== null ? 
 
         <Droppable droppableId="inventory" type={equipCat}>
           {(provided) => (
             <div
-              className="filteredInventory"
-              {...provided.droppableProps}
-              ref={provided.innerRef}
+            className="filteredInventory"
+            {...provided.droppableProps}
+            ref={provided.innerRef}
             >
               {selectedPlayer.player_inventory.map((item, index) => {
+
                 if (item.item_type === equipCat) {
                   return (
                     <Draggable
-                      droppableId={item.item}
-                      draggableId={item.item}
-                      index={index}
+                    droppableId={item.item}
+                    draggableId={item.item}
+                    index={index}
                     >
                       {(provided) => (
                         <img
-                          title={item.item + ": " + item.description}
-                          key={item.item}
-                          src={item.token}
-                          className="inventoryItem"
-                          ref={provided.innerRef}
-                          {...provided.dragHandleProps}
-                          {...provided.draggableProps}
+                        title={item.item + ": " + item.description}
+                        key={item.item}
+                        src={item.token}
+                        className="inventoryItem"
+                        ref={provided.innerRef}
+                        {...provided.dragHandleProps}
+                        {...provided.draggableProps}
                         ></img>
-                      )}
+                        )}
                     </Draggable>
                   );
                 }
@@ -107,6 +109,7 @@ const Equipment = function () {
             </div>
           )}
         </Droppable>
+          : <div className="filteredInventory">Select equipment slot above</div>}
       </div>
     </DragDropContext>
   );

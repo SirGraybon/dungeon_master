@@ -3,6 +3,8 @@ import wizard from "../assets/avatars/wizard2.png";
 import warrior from "../assets/avatars/barbarian.png";
 import rogue from "../assets/avatars/thief.png";
 import placeHolder from "../assets/items/potion.png";
+import helm from "../assets/items/helm.png";
+import torso from "../assets/items/torso.png";
 import grass from "../assets/terrain/grass.png"
 
 
@@ -45,8 +47,8 @@ const data = {
       gold: 0,
       player_inventory: [
         {item: "Health Potion", item_type: "consumable", uses: 1, unitWeight: 15, qty: 1, get totalWeight() {this.totalWeight = this.unitWeight * this.qty } , token: placeHolder, description: "Heals user for 25HP"},
-        {item: "leather helmet", item_type: "head", uses: 1, unitWeight: 15, qty: 1, get totalWeight() {this.totalWeight = this.unitWeight * this.qty } , token: placeHolder, description: "leather helmet"},
-        {item: "metal chest plate", item_type: "torso", uses: 1, unitWeight: 15, qty: 1, get totalWeight() {this.totalWeight = this.unitWeight * this.qty } , token: placeHolder, description: "metal chest plate"},
+        {item: "metal helmet", item_type: "head", uses: 1, unitWeight: 15, qty: 1, get totalWeight() {this.totalWeight = this.unitWeight * this.qty } , token: helm, description: ""},
+        {item: "leather plate", item_type: "torso", uses: 1, unitWeight: 15, qty: 1, get totalWeight() {this.totalWeight = this.unitWeight * this.qty } , token: torso, description: ""},
       ],
       stats: {
         Dex: 10,

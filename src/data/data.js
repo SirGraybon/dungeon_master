@@ -34,6 +34,7 @@ const data = {
         Chr: 10,
         Wis: 10,
       },
+      equipment: {head:{}, torso: {}, belt: {}, legs: {}, gloves: {}, right: {}, boots: {}, amulet: {}, left: {}, ring: {}}
     },
     {
       id: 2,
@@ -48,7 +49,7 @@ const data = {
       player_inventory: [
         {item: "Health Potion", item_type: "consumable", uses: 1, unitWeight: 15, qty: 1, get totalWeight() {this.totalWeight = this.unitWeight * this.qty } , token: placeHolder, description: "Heals user for 25HP"},
         {item: "metal helmet", item_type: "head", uses: 1, unitWeight: 15, qty: 1, get totalWeight() {this.totalWeight = this.unitWeight * this.qty } , token: helm, description: ""},
-        {item: "leather plate", item_type: "torso", uses: 1, unitWeight: 15, qty: 1, get totalWeight() {this.totalWeight = this.unitWeight * this.qty } , token: torso, description: ""},
+        // {item: "leather plate", item_type: "torso", uses: 1, unitWeight: 15, qty: 1, get totalWeight() {this.totalWeight = this.unitWeight * this.qty } , token: torso, description: ""},
       ],
       stats: {
         Dex: 10,
@@ -58,6 +59,7 @@ const data = {
         Chr: 10,
         Wis: 10,
       },
+      equipment: {head: 0, torso: {item: "leather plate", item_type: "torso", uses: 1, unitWeight: 15, qty: 1, get totalWeight() {this.totalWeight = this.unitWeight * this.qty } , token: torso, description: ""}, belt: 0, legs: 0, gloves: 0, right: 0, boots: 0, amulet: 0, left: 0, ring: 0} 
     },
     {
       id: 3,
@@ -81,6 +83,7 @@ const data = {
         Chr: 10,
         Wis: 10,
       },
+      equipment: {head:{}, torso: {}, belt: {}, legs: {}, gloves: {}, right: {}, boots: {}, amulet: {}, left: {}, ring: {}}
     },
   ],
 

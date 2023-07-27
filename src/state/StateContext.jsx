@@ -30,7 +30,7 @@ export const StateProvider = ({ children }) => {
     let targetDie = currentDice[index];
     targetDie.result = Math.floor(Math.random() * targetDie.die_type) + 1;
     const feedUpdate = ` rolled a D${targetDie.die_type}. Result: ${targetDie.result}`;
-    postMessage(feedUpdate, "diceRoll")
+    postMessage(feedUpdate, "diceRoll");
     targetDie.status = "rolled";
     dispatch({ type: "ROLL_DIE", payload: currentDice });
   };
@@ -47,6 +47,7 @@ export const StateProvider = ({ children }) => {
   };
 
   ////////////////////DRAG AND DROP FUNCTIONs////////////////////////////////////////////////////////////
+  ////////////////////DRAG AND DROP BOARD////////////////////////////////////////////////////////////
   const handleDrag = function (results) {
     console.log(results);
     const { source, destination, type } = results;
@@ -93,6 +94,17 @@ export const StateProvider = ({ children }) => {
       return dispatch({ type: "UPDATE_DATA", payload: newData });
     }
   };
+  ////////////////////DRAG AND DROP EQUIPMENT////////////////////////////////////////////////////////////
+  const handleEquip = function (results) {
+    const newData = {...state.data}
+    const selectedPlayer = state.selectedPlayer
+    console.log(selectedPlayer)
+    console.log(results);
+    ////////////////////////////////////////UNEQUIP ITEM////////////////////////////////////////////////////////////
+    if(results.destination.droppableId === "inventory"){
+      // const prevItem = newData.playerDATA
+    }
+  };
 
   ////////////////////DISPLAY FUNCTIONs////////////////////////////////////////////////////////////
 
@@ -124,6 +136,7 @@ export const StateProvider = ({ children }) => {
     editTerrain,
     setTerrainBrush,
     postMessage,
+    handleEquip,
     state,
     data: state.data,
     display: state.display,

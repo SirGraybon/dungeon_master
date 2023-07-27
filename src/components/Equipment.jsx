@@ -4,145 +4,71 @@ import "../styles/equipment.css";
 import { useState } from "react";
 
 const Equipment = function () {
+  const slots = [
+    ["gloves", "right", "boots"],
+    ["head", "torso", "belt", "legs"],
+    ["amulet", "left", "ring"],
+  ];
   const right = ["gloves", "right", "boots"];
   const center = ["head", "torso", "belt", "legs"];
   const left = ["amulet", "left", "ring"];
   const [equipCat, setEquipCat] = useState(null);
-  const { selectedPlayer } = shareState();
+  const { selectedPlayer, handleEquip } = shareState();
 
   const handleClick = function (selection) {
     console.log(selectedPlayer.equipment[equipCat]);
     setEquipCat(selection);
   };
   return (
-    <DragDropContext>
+    <DragDropContext onDragEnd={handleEquip}>
       <div className="equipmentContainer">
         <div className="equipment">
-          <div className="equipmentColumn">
-            {right.map((slot) => {
-              return (
-                <Droppable droppableId={slot} type={slot}>
-                  {(provided) => (
-                    <div
-                      className="equipmentSlot"
-                      {...provided.droppableProps}
-                      ref={provided.innerRef}
-                      onClick={() => handleClick(slot)}
-                    >
-                      {typeof selectedPlayer.equipment[slot] === "object" ? (
-                        <Draggable
-                          droppableId={selectedPlayer.equipment[slot].item}
-                          draggableId={selectedPlayer.equipment[slot].item}
+          {slots.map((slotColumn) => {
+            return (
+              <div className="equipmentColumn">
+                {slotColumn.map((slot) => {
+                  return (
+                    <Droppable droppableId={slot} type={slot}>
+                      {(provided) => (
+                        <div
+                          className="equipmentSlot"
+                          {...provided.droppableProps}
+                          ref={provided.innerRef}
+                          onClick={() => handleClick(slot)}
                         >
-                          {(provided) => (
-                            <img
-                              title={
-                                selectedPlayer.equipment[slot].item +
-                                ": " +
-                                selectedPlayer.equipment[slot].description
-                              }
-                              key={selectedPlayer.equipment[slot].item}
-                              src={selectedPlayer.equipment[slot].token}
-                              className="inventoryItem"
-                              ref={provided.innerRef}
-                              {...provided.dragHandleProps}
-                              {...provided.draggableProps}
-                            ></img>
+                          {selectedPlayer.equipment[slot].length > 0 ? (
+                            <Draggable
+                              droppableId={selectedPlayer.equipment[slot][0].item}
+                              draggableId={selectedPlayer.equipment[slot][0].item}
+                              index='0'
+                            >
+                              {(provided) => (
+                                <img
+                                  title={
+                                    selectedPlayer.equipment[slot][0].item +
+                                    ": " +
+                                    selectedPlayer.equipment[slot][0].description
+                                  }
+                                  key={selectedPlayer.equipment[slot][0].item}
+                                  src={selectedPlayer.equipment[slot][0].token}
+                                  className="inventoryItem"
+                                  ref={provided.innerRef}
+                                  {...provided.dragHandleProps}
+                                  {...provided.draggableProps}
+                                ></img>
+                              )}
+                            </Draggable>
+                          ) : (
+                            slot
                           )}
-                        </Draggable>
-                      ) : (
-                        slot
+                        </div>
                       )}
-                    </div>
-                  )}
-                </Droppable>
-              );
-            })}
-          </div>
-
-          <div className="equipmentColumn">
-            {center.map((slot) => {
-              return (
-                <Droppable droppableId={slot} type={slot}>
-                  {(provided) => (
-                    <div
-                      className="equipmentSlot"
-                      {...provided.droppableProps}
-                      ref={provided.innerRef}
-                      onClick={() => handleClick(slot)}
-                    >
-                      {typeof selectedPlayer.equipment[slot] === "object" ? (
-                        <Draggable
-                          droppableId={selectedPlayer.equipment[slot].item}
-                          draggableId={selectedPlayer.equipment[slot].item}
-                        >
-                          {(provided) => (
-                            <img
-                              title={
-                                selectedPlayer.equipment[slot].item +
-                                ": " +
-                                selectedPlayer.equipment[slot].description
-                              }
-                              key={selectedPlayer.equipment[slot].item}
-                              src={selectedPlayer.equipment[slot].token}
-                              className="inventoryItem"
-                              ref={provided.innerRef}
-                              {...provided.dragHandleProps}
-                              {...provided.draggableProps}
-                            ></img>
-                          )}
-                        </Draggable>
-                      ) : (
-                        slot
-                      )}
-                    </div>
-                  )}
-                </Droppable>
-              );
-            })}
-          </div>
-
-          <div className="equipmentColumn">
-            {left.map((slot) => {
-              return (
-                <Droppable droppableId={slot} type={slot}>
-                  {(provided) => (
-                    <div
-                      className="equipmentSlot"
-                      {...provided.droppableProps}
-                      ref={provided.innerRef}
-                      onClick={() => handleClick(slot)}
-                    >
-                      {typeof selectedPlayer.equipment[slot] === "object" ? (
-                        <Draggable
-                          droppableId={selectedPlayer.equipment[slot].item}
-                          draggableId={selectedPlayer.equipment[slot].item}
-                        >
-                          {(provided) => (
-                            <img
-                              title={
-                                selectedPlayer.equipment[slot].item +
-                                ": " +
-                                selectedPlayer.equipment[slot].description
-                              }
-                              key={selectedPlayer.equipment[slot].item}
-                              src={selectedPlayer.equipment[slot].token}
-                              className="inventoryItem"
-                              ref={provided.innerRef}
-                              {...provided.dragHandleProps}
-                              {...provided.draggableProps}
-                            ></img>
-                          )}
-                        </Draggable>
-                      ) : (
-                        slot
-                      )}
-                    </div>
-                  )}
-                </Droppable>
-              );
-            })}
-          </div>
+                    </Droppable>
+                  );
+                })}
+              </div>
+            );
+          })}
         </div>
         {equipCat !== null ? (
           <Droppable droppableId="inventory" type={equipCat}>

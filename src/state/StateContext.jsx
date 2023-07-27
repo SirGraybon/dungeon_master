@@ -98,11 +98,41 @@ export const StateProvider = ({ children }) => {
   const handleEquip = function (results) {
     const newData = {...state.data}
     const selectedPlayer = state.selectedPlayer
+    const selectedPlayerIndex = newData.playerDATA.findIndex((player) => player.id === selectedPlayer.id)
+
     console.log(selectedPlayer)
+    console.log(selectedPlayerIndex)
     console.log(results);
+
+    if (results.destination === null){
+      return
+    }
     ////////////////////////////////////////UNEQUIP ITEM////////////////////////////////////////////////////////////
-    if(results.destination.droppableId === "inventory"){
-      // const prevItem = newData.playerDATA
+    if( results.destination.droppableId === "inventory"){
+      const prevItem = newData.playerDATA[selectedPlayerIndex].equipment[results.source.droppableId][0]
+      selectedPlayer.player_inventory.push(prevItem)
+      selectedPlayer.equipment[results.source.droppableId].pop()
+      newData.playerDATA[selectedPlayerIndex] = selectedPlayer
+      return dispatch({ type: "UPDATE_DATA", payload: newData });
+    }
+    ////////////////////////////////////////EQUIP ITEM////////////////////////////////////////////////////////////
+    if( results.source.droppableId === "inventory" && selectedPlayer.equipment[results.destination.droppableId].length < 1){
+      const newItem = newData.playerDATA[selectedPlayerIndex].player_inventory[results.source.index]
+      selectedPlayer.equipment[results.destination.droppableId].push(newItem)
+      selectedPlayer.player_inventory.splice(results.source.index,1)
+      newData.playerDATA[selectedPlayerIndex] = selectedPlayer
+      return dispatch({ type: "UPDATE_DATA", payload: newData });
+    }
+    ////////////////////////////////////////SWAP ITEM////////////////////////////////////////////////////////////
+    if( results.source.droppableId === "inventory"){
+      const newItem = newData.playerDATA[selectedPlayerIndex].player_inventory[results.source.index]
+      const prevItem = newData.playerDATA[selectedPlayerIndex].equipment[results.destination.droppableId][0]
+      selectedPlayer.equipment[results.destination.droppableId].pop()
+      selectedPlayer.equipment[results.destination.droppableId].push(newItem)
+      selectedPlayer.player_inventory.splice(results.source.index,1)
+      selectedPlayer.player_inventory.push(prevItem)
+      newData.playerDATA[selectedPlayerIndex] = selectedPlayer
+      return dispatch({ type: "UPDATE_DATA", payload: newData });
     }
   };
 

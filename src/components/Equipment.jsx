@@ -38,17 +38,23 @@ const Equipment = function () {
                         >
                           {selectedPlayer.equipment[slot].length > 0 ? (
                             <Draggable
-                              droppableId={selectedPlayer.equipment[slot][0].item}
-                              draggableId={selectedPlayer.equipment[slot][0].item}
-                              index='0'
+                              droppableId={
+                                selectedPlayer.equipment[slot][0].item
+                              }
+                              draggableId={
+                                selectedPlayer.equipment[slot][0].item
+                              }
+                              index={0}
                             >
                               {(provided) => (
                                 <img
                                   title={
                                     selectedPlayer.equipment[slot][0].item +
                                     ": " +
-                                    selectedPlayer.equipment[slot][0].description
+                                    selectedPlayer.equipment[slot][0]
+                                      .description
                                   }
+                                  index={0}
                                   key={selectedPlayer.equipment[slot][0].item}
                                   src={selectedPlayer.equipment[slot][0].token}
                                   className="inventoryItem"

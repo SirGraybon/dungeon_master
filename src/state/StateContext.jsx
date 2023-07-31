@@ -49,11 +49,12 @@ export const StateProvider = ({ children }) => {
   ////////////////////DRAG AND DROP FUNCTIONs////////////////////////////////////////////////////////////
   ////////////////////DRAG AND DROP BOARD////////////////////////////////////////////////////////////
   const handleDrag = function (results) {
-    console.log(results);
+    const board_row = state.board_row
+    const board_column = state.board_column
     const { source, destination, type } = results;
     if (!destination) return;
     const newData = { ...state.data };
-    const destCell = newData.cellDATA.findIndex(
+    const destCell = newData.cellDATA[board_column][board_row].findIndex(
       (cell) => cell.id === destination.droppableId
     );
     const destIndex = destination.index;
@@ -70,9 +71,9 @@ export const StateProvider = ({ children }) => {
       const currentLocation = newData.playerDATA[sourceIndex].location;
 
       const token = newData.playerDATA[source.index];
-      newData.cellDATA[destCell].content.push(token);
+      newData.cellDATA[board_column][board_row][destCell].content.push(token);
       if (currentLocation > 0) {
-        newData.cellDATA[currentLocation].content = [];
+        newData.cellDATA[board_column][board_row][currentLocation].content = [];
       }
       newData.playerDATA[sourceIndex].location = destCell;
       console.log(newData);
@@ -81,15 +82,15 @@ export const StateProvider = ({ children }) => {
 
     //droppin in same cell: result - rearange
     if (source.droppableId !== destination.droppableId) {
-      const sourceCell = newData.cellDATA.findIndex(
+      const sourceCell = newData.cellDATA[displayed_board].cells.findIndex(
         (cell) => cell.id === source.droppableId
       );
 
-      const [moving] = newData.cellDATA[sourceCell].content.splice(
+      const [moving] = newData.cellDATA[board_column][board_row][sourceCell].content.splice(
         source.index,
         1
       );
-      newData.cellDATA[destCell].content.splice(destIndex, 0, moving);
+      newData.cellDATA[board_column][board_row][destCell].content.splice(destIndex, 0, moving);
 
       return dispatch({ type: "UPDATE_DATA", payload: newData });
     }
@@ -127,10 +128,10 @@ export const StateProvider = ({ children }) => {
     if( results.source.droppableId === "inventory"){
       const newItem = newData.playerDATA[selectedPlayerIndex].player_inventory[results.source.index]
       const prevItem = newData.playerDATA[selectedPlayerIndex].equipment[results.destination.droppableId][0]
+      selectedPlayer.player_inventory.push(prevItem)
       selectedPlayer.equipment[results.destination.droppableId].pop()
       selectedPlayer.equipment[results.destination.droppableId].push(newItem)
       selectedPlayer.player_inventory.splice(results.source.index,1)
-      selectedPlayer.player_inventory.push(prevItem)
       newData.playerDATA[selectedPlayerIndex] = selectedPlayer
       return dispatch({ type: "UPDATE_DATA", payload: newData });
     }
@@ -173,6 +174,8 @@ export const StateProvider = ({ children }) => {
     selectedPlayer: state.selectedPlayer,
     feed: state.feed,
     terrainOptions: state.terrainOptions,
+    board_column: state.board_column,
+    board_row: state.board_row,
   };
 
   return (

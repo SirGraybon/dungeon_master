@@ -6,10 +6,10 @@ import dirt from "../assets/terrain/dirt.png"
 import wall from "../assets/terrain/wall.png"
 
 export default function Board() {
-  const { data, handleDrag, display, setDisplay, editTerrain } = shareState();
+  const { data, handleDrag, display, setDisplay, editTerrain, board_row, board_column } = shareState();
   return (
     <div className="board">
-      {data.cellDATA.map((cell, index) => {
+      {data.cellDATA[board_column][board_row].map((cell, index) => {
         return (
           <div>
             <div className="horizontalPartition"></div>

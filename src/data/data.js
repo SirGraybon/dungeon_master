@@ -88,11 +88,11 @@ const data = {
     },
   ],
 
-  cellDATA: [],
+  cellDATA: [[[]]],
 };
 
 for (let i = 0; i < 400; i++) {
-  data.cellDATA.push({ id: `${i}`, content: [], background: grass });
+  data.cellDATA[0][0].push({ id: `${i}`, content: [], background: grass });
 }
 
 export default data;

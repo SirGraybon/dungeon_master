@@ -6,13 +6,19 @@ import InformationCenter from "./InformationCenter";
 import Feed from "./Feed";
 
 const PlayArea = function (props) {
-  const { handleDrag} = shareState();
+  const { handleDrag } = shareState();
 
   return (
     <DragDropContext onDragEnd={handleDrag}>
       <div className="playArea">
-      <Feed/>
-        <Board />
+        <Feed />
+        <div className="boardMoveButtonHorizontal"></div>
+        <div>
+          <div className="boardMoveButton"></div>
+          <Board />
+          <div className="boardMoveButton"></div>
+        </div>
+        <div className="boardMoveButtonHorizontal"></div>
         <InformationCenter />
       </div>
     </DragDropContext>

@@ -8,6 +8,8 @@ import shareState from "./StateContext";
 // const StateHook = function () {
 export const defaultState = {
   data: data,
+  board_column: 0,
+  board_row: 0,
   selectedPlayer: "diceBowl",
   display: "",
   feed: [],

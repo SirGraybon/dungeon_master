@@ -44,8 +44,13 @@
 
  /* overflow: visible;  */
 }
+.boardMoveButtonVertical {
+  height: auto;
+  width: 30px;
+  cursor: pointer;
+}
 .boardMoveButtonHorizontal {
-  height: 5px;
-  background-color: blue;
+  height: 30px;
+  width: auto;
   cursor: pointer;
 }

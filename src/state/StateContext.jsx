@@ -49,8 +49,8 @@ export const StateProvider = ({ children }) => {
   ////////////////////DRAG AND DROP FUNCTIONs////////////////////////////////////////////////////////////
   ////////////////////DRAG AND DROP BOARD////////////////////////////////////////////////////////////
   const handleDrag = function (results) {
-    const board_row = state.board_row
-    const board_column = state.board_column
+    const board_row = state.board_row;
+    const board_column = state.board_column;
     const { source, destination, type } = results;
     if (!destination) return;
     const newData = { ...state.data };
@@ -86,53 +86,73 @@ export const StateProvider = ({ children }) => {
         (cell) => cell.id === source.droppableId
       );
 
-      const [moving] = newData.cellDATA[board_column][board_row][sourceCell].content.splice(
-        source.index,
-        1
+      const [moving] = newData.cellDATA[board_column][board_row][
+        sourceCell
+      ].content.splice(source.index, 1);
+      newData.cellDATA[board_column][board_row][destCell].content.splice(
+        destIndex,
+        0,
+        moving
       );
-      newData.cellDATA[board_column][board_row][destCell].content.splice(destIndex, 0, moving);
 
       return dispatch({ type: "UPDATE_DATA", payload: newData });
     }
   };
   ////////////////////DRAG AND DROP EQUIPMENT////////////////////////////////////////////////////////////
   const handleEquip = function (results) {
-    const newData = {...state.data}
-    const selectedPlayer = state.selectedPlayer
-    const selectedPlayerIndex = newData.playerDATA.findIndex((player) => player.id === selectedPlayer.id)
+    const newData = { ...state.data };
+    const selectedPlayer = state.selectedPlayer;
+    const selectedPlayerIndex = newData.playerDATA.findIndex(
+      (player) => player.id === selectedPlayer.id
+    );
 
-    console.log(selectedPlayer)
-    console.log(selectedPlayerIndex)
+    console.log(selectedPlayer);
+    console.log(selectedPlayerIndex);
     console.log(results);
 
-    if (results.destination === null){
-      return
+    if (results.destination === null) {
+      return;
     }
     ////////////////////////////////////////UNEQUIP ITEM////////////////////////////////////////////////////////////
-    if( results.destination.droppableId === "inventory"){
-      const prevItem = newData.playerDATA[selectedPlayerIndex].equipment[results.source.droppableId][0]
-      selectedPlayer.player_inventory.push(prevItem)
-      selectedPlayer.equipment[results.source.droppableId].pop()
-      newData.playerDATA[selectedPlayerIndex] = selectedPlayer
+    if (results.destination.droppableId === "inventory") {
+      const prevItem =
+        newData.playerDATA[selectedPlayerIndex].equipment[
+          results.source.droppableId
+        ][0];
+      selectedPlayer.player_inventory.push(prevItem);
+      selectedPlayer.equipment[results.source.droppableId].pop();
+      newData.playerDATA[selectedPlayerIndex] = selectedPlayer;
       return dispatch({ type: "UPDATE_DATA", payload: newData });
     }
     ////////////////////////////////////////EQUIP ITEM////////////////////////////////////////////////////////////
-    if( results.source.droppableId === "inventory" && selectedPlayer.equipment[results.destination.droppableId].length < 1){
-      const newItem = newData.playerDATA[selectedPlayerIndex].player_inventory[results.source.index]
-      selectedPlayer.equipment[results.destination.droppableId].push(newItem)
-      selectedPlayer.player_inventory.splice(results.source.index,1)
-      newData.playerDATA[selectedPlayerIndex] = selectedPlayer
+    if (
+      results.source.droppableId === "inventory" &&
+      selectedPlayer.equipment[results.destination.droppableId].length < 1
+    ) {
+      const newItem =
+        newData.playerDATA[selectedPlayerIndex].player_inventory[
+          results.source.index
+        ];
+      selectedPlayer.equipment[results.destination.droppableId].push(newItem);
+      selectedPlayer.player_inventory.splice(results.source.index, 1);
+      newData.playerDATA[selectedPlayerIndex] = selectedPlayer;
       return dispatch({ type: "UPDATE_DATA", payload: newData });
     }
     ////////////////////////////////////////SWAP ITEM////////////////////////////////////////////////////////////
-    if( results.source.droppableId === "inventory"){
-      const newItem = newData.playerDATA[selectedPlayerIndex].player_inventory[results.source.index]
-      const prevItem = newData.playerDATA[selectedPlayerIndex].equipment[results.destination.droppableId][0]
-      selectedPlayer.player_inventory.push(prevItem)
-      selectedPlayer.equipment[results.destination.droppableId].pop()
-      selectedPlayer.equipment[results.destination.droppableId].push(newItem)
-      selectedPlayer.player_inventory.splice(results.source.index,1)
-      newData.playerDATA[selectedPlayerIndex] = selectedPlayer
+    if (results.source.droppableId === "inventory") {
+      const newItem =
+        newData.playerDATA[selectedPlayerIndex].player_inventory[
+          results.source.index
+        ];
+      const prevItem =
+        newData.playerDATA[selectedPlayerIndex].equipment[
+          results.destination.droppableId
+        ][0];
+      selectedPlayer.player_inventory.push(prevItem);
+      selectedPlayer.equipment[results.destination.droppableId].pop();
+      selectedPlayer.equipment[results.destination.droppableId].push(newItem);
+      selectedPlayer.player_inventory.splice(results.source.index, 1);
+      newData.playerDATA[selectedPlayerIndex] = selectedPlayer;
       return dispatch({ type: "UPDATE_DATA", payload: newData });
     }
   };
@@ -141,6 +161,36 @@ export const StateProvider = ({ children }) => {
 
   const setDisplay = function (displayType, player) {
     dispatch({ type: "SET_DISPLAY", displayType, player });
+  };
+  ////////////////////MOVE BOARD FUNCTIONs////////////////////////////////////////////////////////////
+
+  const moveBoard = function (direction) {
+    let row = state.board_row;
+    let column = state.board_column;
+    if (direction === "right") {
+      column++;
+    }
+    if (direction === "left") {
+      column--;
+    }
+    if (direction === "up") {
+      row--;
+    }
+    if (direction === "down") {
+      row++;
+    }
+    if(row < 0 || column < 0){
+      return
+    }
+    console.log("row: " + row, "Column: "+ column)
+    !state.data.cellDATA[row] && dispatch({type: "NEW_ROW"})
+    !state.data.cellDATA[row][column] && dispatch({type: "NEW_COLUMN", row})
+
+
+
+
+
+    dispatch({ type: "MOVE_BOARD", row, column });
   };
   ////////////////////EDIT TERRAIN FUNCTIONs////////////////////////////////////////////////////////////
 
@@ -168,6 +218,7 @@ export const StateProvider = ({ children }) => {
     setTerrainBrush,
     postMessage,
     handleEquip,
+    moveBoard,
     state,
     data: state.data,
     display: state.display,

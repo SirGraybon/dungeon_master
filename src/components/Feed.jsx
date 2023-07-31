@@ -5,7 +5,6 @@ import "../styles/feed.css";
 const Feed = function () {
   const [message, setMessage] = useState("");
   const { feed, postMessage } = shareState();
-  console.log(feed);
 
   const updateMessage = function (event) {
     setMessage(event.target.value);

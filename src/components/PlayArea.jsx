@@ -4,21 +4,26 @@ import shareState from "../state/StateContext";
 import Board from "./Board";
 import InformationCenter from "./InformationCenter";
 import Feed from "./Feed";
+import "../styles/board.css"
 
 const PlayArea = function (props) {
-  const { handleDrag } = shareState();
+  const { handleDrag, moveBoard } = shareState();
+
+  const handleClick = function(direction){
+    moveBoard(direction)
+  }
 
   return (
     <DragDropContext onDragEnd={handleDrag}>
       <div className="playArea">
         <Feed />
-        <div className="boardMoveButtonHorizontal"></div>
+        <div className="boardMoveButtonVertical" onClick={() => handleClick("left")}></div>
         <div>
-          <div className="boardMoveButton"></div>
+          <div className="boardMoveButtonHorizontal" onClick={() => handleClick("up")}></div>
           <Board />
-          <div className="boardMoveButton"></div>
+          <div className="boardMoveButtonHorizontal" onClick={() => handleClick("down")}></div>
         </div>
-        <div className="boardMoveButtonHorizontal"></div>
+        <div className="boardMoveButtonVertical" onClick={() => handleClick("right")}></div>
         <InformationCenter />
       </div>
     </DragDropContext>

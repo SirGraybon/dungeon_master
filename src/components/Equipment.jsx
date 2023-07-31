@@ -9,9 +9,7 @@ const Equipment = function () {
     ["head", "torso", "belt", "legs"],
     ["amulet", "left", "ring"],
   ];
-  const right = ["gloves", "right", "boots"];
-  const center = ["head", "torso", "belt", "legs"];
-  const left = ["amulet", "left", "ring"];
+
   const [equipCat, setEquipCat] = useState(null);
   const { selectedPlayer, handleEquip } = shareState();
 

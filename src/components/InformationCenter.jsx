@@ -4,9 +4,10 @@ import DiceBowl from "./DiceBowl";
 import PlayerDetails from "./PlayerDetails";
 import TerrainEditor from "./TerrainEditor";
 import "../App.css"
+import MiniMap from "./MiniMap";
 
 export default function InformationCenter() {
-  const { data, handleDrag, display, setDisplay } = shareState();
+  const { data, display, setDisplay } = shareState();
 
   return (
     <div className="information_center">
@@ -72,6 +73,7 @@ export default function InformationCenter() {
       {display === "player" && <PlayerDetails />}
       {display === "diceBowl" && <DiceBowl />}
       {display === "terrain" && <TerrainEditor />}
+      {display === "minimap" && <MiniMap />}
     </div>
   );
 }

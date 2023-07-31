@@ -11,7 +11,7 @@ export const defaultState = {
   board_column: 0,
   board_row: 0,
   selectedPlayer: "diceBowl",
-  display: "",
+  display: "minimap",
   feed: [],
   dice: [],
   terrainOptions: [grass, dirt],
@@ -82,11 +82,11 @@ export const reducer = function (state, action) {
       };
     }
     ////////////////////TERRAIN////////////////////////////////////////////////////////////
-
+    
     case "EDIT_TERRAIN": {
       const newData = { ...state.data };
-      newData.cellDATA[action.payload].background = state.terrainBrush;
-
+      newData.cellDATA[state.board_row][state.board_column][action.payload].background = state.terrainBrush;
+      
       return {
         ...state,
         data: newData,
@@ -95,6 +95,30 @@ export const reducer = function (state, action) {
     case "SET_TERRAIN_BRUSH": {
       const brush = action.payload;
       return { ...state, terrainBrush: brush };
+    }
+    ////////////////////MOVE BOARD////////////////////////////////////////////////////////////
+    case "MOVE_BOARD": {
+      return { ...state, board_row: action.row, board_column: action.column };
+    }
+    case "NEW_ROW":{
+      const newData = {...state.data}
+      const cells = [[]]
+      for (let i = 0; i < 400; i++) {
+        cells[0].push({ id: `${i}`, content: [], background: grass });
+      }
+      newData.cellDATA.push(cells)
+      console.log(newData.cellDATA)
+      return {...state, cata: newData }
+    }
+    case "NEW_COLUMN":{
+      const newData = {...state.data}
+      const cells = []
+      for (let i = 0; i < 400; i++) {
+        cells.push({ id: `${i}`, content: [], background: grass });
+      }
+      newData.cellDATA[action.row].push(cells)
+      console.log(newData.cellDATA)
+      return {...state, cata: newData }
     }
     ////////////////////FEED////////////////////////////////////////////////////////////
     case "POST_MESSAGE": {

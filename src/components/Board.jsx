@@ -9,7 +9,7 @@ export default function Board() {
   const { data, handleDrag, display, setDisplay, editTerrain, board_row, board_column } = shareState();
   return (
     <div className="board">
-      {data.cellDATA[board_column][board_row].map((cell, index) => {
+      {data.cellDATA[board_row][board_column].map((cell, index) => {
         return (
           <div>
             <div className="horizontalPartition"></div>

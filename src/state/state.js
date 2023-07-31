@@ -82,11 +82,13 @@ export const reducer = function (state, action) {
       };
     }
     ////////////////////TERRAIN////////////////////////////////////////////////////////////
-    
+
     case "EDIT_TERRAIN": {
       const newData = { ...state.data };
-      newData.cellDATA[state.board_row][state.board_column][action.payload].background = state.terrainBrush;
-      
+      newData.cellDATA[state.board_row][state.board_column][
+        action.payload
+      ].background = state.terrainBrush;
+
       return {
         ...state,
         data: newData,
@@ -100,38 +102,45 @@ export const reducer = function (state, action) {
     case "MOVE_BOARD": {
       return { ...state, board_row: action.row, board_column: action.column };
     }
-    case "NEW_ROW":{
-      const newData = {...state.data}
-      const cells = [[]]
+    // case "NEW_ROW":{
+    //   const newData = {...state.data}
+    //   const cells = [[]]
+    //   for (let i = 0; i < 400; i++) {
+    //     cells[0].push({ id: `${i}`, content: [], background: grass });
+    //   }
+    //   newData.cellDATA.push(cells)
+    //   console.log(newData.cellDATA)
+    //   return {...state, cata: newData }
+    // }
+    // case "NEW_COLUMN":{
+    //   const newData = {...state.data}
+    //   const cells = []
+    //   for (let i = 0; i < 400; i++) {
+    //     cells.push({ id: `${i}`, content: [], background: grass });
+    //   }
+    //   newData.cellDATA[action.row].push(cells)
+    //   return {...state, cata: newData }
+    // }
+    case "POPULATE_MAP": {
+      const newData = { ...state.data };
       for (let i = 0; i < 400; i++) {
-        cells[0].push({ id: `${i}`, content: [], background: grass });
+        newData.cellDATA[action.row][action.column].push({ id: `${i}`, content: [], background: grass });
       }
-      newData.cellDATA.push(cells)
-      console.log(newData.cellDATA)
-      return {...state, cata: newData }
-    }
-    case "NEW_COLUMN":{
-      const newData = {...state.data}
-      const cells = []
-      for (let i = 0; i < 400; i++) {
-        cells.push({ id: `${i}`, content: [], background: grass });
-      }
-      newData.cellDATA[action.row].push(cells)
-      console.log(newData.cellDATA)
-      return {...state, cata: newData }
+      // console.log(newData.cellDATA)
+      return { ...state, data: newData };
     }
     ////////////////////FEED////////////////////////////////////////////////////////////
     case "POST_MESSAGE": {
-      let dateStamp; 
+      let dateStamp;
       const getDate = function () {
-        return dateStamp = `${months[month]}, ${day} ${year}`;
+        return (dateStamp = `${months[month]}, ${day} ${year}`);
       };
-      let timeStamp 
+      let timeStamp;
       const getTime = function () {
-        return timeStamp = `${hours}:${min}:${sec}`;
+        return (timeStamp = `${hours}:${min}:${sec}`);
       };
-      getDate()
-      getTime()
+      getDate();
+      getTime();
       const currentFeed = [...state.feed];
       const feedUpdate = {
         event: action.payload,

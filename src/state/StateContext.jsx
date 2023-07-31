@@ -179,12 +179,12 @@ export const StateProvider = ({ children }) => {
     if (direction === "down") {
       row++;
     }
-    if(row < 0 || column < 0){
+    if(row < 0 || column < 0 || row > 4 || column > 4){
       return
     }
     console.log("row: " + row, "Column: "+ column)
-    !state.data.cellDATA[row] && dispatch({type: "NEW_ROW"})
-    !state.data.cellDATA[row][column] && dispatch({type: "NEW_COLUMN", row})
+    // !state.data.cellDATA[row] && dispatch({type: "NEW_ROW"})
+    state.data.cellDATA[row][column].length < 1 && dispatch({type: "POPULATE_MAP", row, column})
 
 
 

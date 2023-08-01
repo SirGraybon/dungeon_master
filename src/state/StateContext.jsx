@@ -180,7 +180,7 @@ export const StateProvider = ({ children }) => {
     if (direction === "down") {
       row++;
     }
-    if(row < 0 || column < 0 || row > 4 || column > 4){
+    if(row < 0 || column < 0 || row > 20 || column > 20){
       return
     }
     console.log("row: " + row, "Column: "+ column)

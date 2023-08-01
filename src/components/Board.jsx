@@ -9,6 +9,7 @@ export default function Board() {
   const { data, handleDrag, display, setDisplay, editTerrain, board_row, board_column } = shareState();
   return (
     <div className="board">
+      {console.log(data.cellDATA[board_row][board_column])}
       {data.cellDATA[board_row][board_column].map((cell, index) => {
         return (
           <div>

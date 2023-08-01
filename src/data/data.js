@@ -7,6 +7,7 @@ import helm from "../assets/items/helm.png";
 import torso from "../assets/items/torso.png";
 import metaltorso from "../assets/items/metaltorso.png";
 import grass from "../assets/terrain/grass.png"
+import dirt from "../assets/terrain/dirt.png"
 
 
 const data = {
@@ -90,8 +91,8 @@ const data = {
 
   cellDATA:[]
 };
-const rows = 5
-const columns = 5
+const rows = 21
+const columns = 21
 
 for (let y = 0; y < rows; y++){
   data.cellDATA.push([])
@@ -102,7 +103,13 @@ for (let y = 0; y < rows; y++){
 
 
 for (let i = 0; i < 400; i++) {
-  data.cellDATA[0][0].push({ id: `${i}`, content: [], background: grass });
+  const roll = Math.floor(Math.random() * 10) + 1
+  let background = dirt
+  if(roll > 1){
+    background = grass
+  }
+
+  data.cellDATA[10][10].push({ id: `${i}`, content: [], background });
 }
 
 

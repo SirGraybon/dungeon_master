@@ -9,23 +9,23 @@
 
 .minimapCellExplored{
   
-  margin: 15px;
-  height: 50px;
-  width: 50px;;
+  margin: 1px;
+  height: 15px;
+  width: 15px;;
   background-color: brown;
 }
 .minimapCellCurrent{
   
-  margin: 15px;
-  height: 50px;
-  width: 50px;;
+  /* margin: 1px; */
+  height: 16px;
+  width: 16px;;
   background-color: rgb(203, 149, 34);
 }
 .minimapCellUnexplored{
   
-  margin: 15px;
-  height: 50px;;
-  width: 50px;;
+  margin: 1px;
+  height: 15px;;
+  width: 15px;;
   background-color: lightblue;
 }
 .minimapRow{

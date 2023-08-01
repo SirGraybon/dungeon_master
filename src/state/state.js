@@ -8,8 +8,8 @@ import shareState from "./StateContext";
 // const StateHook = function () {
 export const defaultState = {
   data: data,
-  board_column: 0,
-  board_row: 0,
+  board_column: 10,
+  board_row: 10,
   selectedPlayer: "diceBowl",
   display: "minimap",
   feed: [],
@@ -20,8 +20,7 @@ export const defaultState = {
 };
 
 ////////////////////DATE / TIME VARIABLEs////////////////////////////////////////////////////////////
-const year = new Date().getFullYear(); //To get the Current Year
-const months = [
+let months = [
   "placeholder",
   "Jan",
   "Feb",
@@ -36,11 +35,21 @@ const months = [
   "Nov",
   "Dec",
 ]; // Months as strings
-const month = new Date().getMonth() + 1; //To get the Current Month
-const day = new Date().getDate(); //To get the Current Day
-const hours = new Date().getHours(); //To get the Current Hours
-const min = new Date().getMinutes(); //To get the Current Minutes
-const sec = new Date().getSeconds(); //To get the Current Secondsconsole.log(date)
+let year;
+let month;
+let day;
+let hours;
+let min;
+let sec;
+
+const updateDateTime = function () {
+  year = new Date().getFullYear(); //To get the Current Year
+  month = new Date().getMonth() + 1; //To get the Current Month
+  day = new Date().getDate(); //To get the Current Day
+  hours = new Date().getHours(); //To get the Current Hours
+  min = new Date().getMinutes(); //To get the Current Minutes
+  sec = new Date().getSeconds(); //To get the Current Secondsconsole.log(date)
+};
 
 ////////////////////REDUCER SWITCH CASEs////////////////////////////////////////////////////////////
 export const reducer = function (state, action) {
@@ -52,7 +61,7 @@ export const reducer = function (state, action) {
         dice: action.payload,
       };
     }
-
+    
     case "ROLL_DIE": {
       return {
         ...state,
@@ -82,13 +91,13 @@ export const reducer = function (state, action) {
       };
     }
     ////////////////////TERRAIN////////////////////////////////////////////////////////////
-
+    
     case "EDIT_TERRAIN": {
       const newData = { ...state.data };
       newData.cellDATA[state.board_row][state.board_column][
         action.payload
       ].background = state.terrainBrush;
-
+      
       return {
         ...state,
         data: newData,
@@ -102,45 +111,32 @@ export const reducer = function (state, action) {
     case "MOVE_BOARD": {
       return { ...state, board_row: action.row, board_column: action.column };
     }
-    // case "NEW_ROW":{
-    //   const newData = {...state.data}
-    //   const cells = [[]]
-    //   for (let i = 0; i < 400; i++) {
-    //     cells[0].push({ id: `${i}`, content: [], background: grass });
-    //   }
-    //   newData.cellDATA.push(cells)
-    //   console.log(newData.cellDATA)
-    //   return {...state, cata: newData }
-    // }
-    // case "NEW_COLUMN":{
-    //   const newData = {...state.data}
-    //   const cells = []
-    //   for (let i = 0; i < 400; i++) {
-    //     cells.push({ id: `${i}`, content: [], background: grass });
-    //   }
-    //   newData.cellDATA[action.row].push(cells)
-    //   return {...state, cata: newData }
-    // }
+    
     case "POPULATE_MAP": {
       const newData = { ...state.data };
       for (let i = 0; i < 400; i++) {
-        newData.cellDATA[action.row][action.column].push({ id: `${i}`, content: [], background: grass });
+        for (let i = 0; i < 400; i++) {
+          const roll = Math.floor(Math.random() * 10) + 1;
+          let background = dirt;
+          if (roll > 1) {
+            background = grass;
+          }
+          newData.cellDATA[action.row][action.column].push({
+            id: `${i}`,
+            content: [],
+            background,
+          });
+        }
+        // console.log(newData.cellDATA)
+        return { ...state, data: newData };
       }
-      // console.log(newData.cellDATA)
-      return { ...state, data: newData };
     }
     ////////////////////FEED////////////////////////////////////////////////////////////
     case "POST_MESSAGE": {
-      let dateStamp;
-      const getDate = function () {
-        return (dateStamp = `${months[month]}, ${day} ${year}`);
-      };
-      let timeStamp;
-      const getTime = function () {
-        return (timeStamp = `${hours}:${min}:${sec}`);
-      };
-      getDate();
-      getTime();
+      updateDateTime();
+      
+      const dateStamp = `${months[month]}, ${day} ${year}`;
+      const timeStamp = `${hours}:${min}:${sec}`;
       const currentFeed = [...state.feed];
       const feedUpdate = {
         event: action.payload,
@@ -150,7 +146,7 @@ export const reducer = function (state, action) {
       };
       const todayIndex = currentFeed.findIndex(
         (item) => item.day === dateStamp
-      );
+        );
       console.log(todayIndex);
       if (todayIndex === -1) {
         currentFeed.push({ day: dateStamp, feed: [feedUpdate] });

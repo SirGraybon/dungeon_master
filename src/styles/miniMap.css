@@ -14,6 +14,13 @@
   width: 50px;;
   background-color: brown;
 }
+.minimapCellCurrent{
+  
+  margin: 15px;
+  height: 50px;
+  width: 50px;;
+  background-color: rgb(203, 149, 34);
+}
 .minimapCellUnexplored{
   
   margin: 15px;

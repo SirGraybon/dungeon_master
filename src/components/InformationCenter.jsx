@@ -69,6 +69,7 @@ export default function InformationCenter() {
       <div className="option_bar">
         <button onClick={() => setDisplay("diceBowl", null)}> Dice Bowl</button>
         <button onClick={() => setDisplay("terrain", null)}> Terrain Editor</button>
+        <button onClick={() => setDisplay("minimap", null)}> Minimap</button>
       </div>
       {display === "player" && <PlayerDetails />}
       {display === "diceBowl" && <DiceBowl />}

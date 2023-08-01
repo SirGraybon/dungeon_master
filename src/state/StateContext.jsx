@@ -54,9 +54,10 @@ export const StateProvider = ({ children }) => {
     const { source, destination, type } = results;
     if (!destination) return;
     const newData = { ...state.data };
-    const destCell = newData.cellDATA[board_column][board_row].findIndex(
+    const destCell = newData.cellDATA[board_row][board_column].findIndex(
       (cell) => cell.id === destination.droppableId
     );
+    console.log(destCell)
     const destIndex = destination.index;
 
     //dropping in play from source: result - add to play area
@@ -71,9 +72,9 @@ export const StateProvider = ({ children }) => {
       const currentLocation = newData.playerDATA[sourceIndex].location;
 
       const token = newData.playerDATA[source.index];
-      newData.cellDATA[board_column][board_row][destCell].content.push(token);
+      newData.cellDATA[board_row][board_column][destCell].content.push(token);
       if (currentLocation > 0) {
-        newData.cellDATA[board_column][board_row][currentLocation].content = [];
+        newData.cellDATA[board_row][board_column][currentLocation].content = [];
       }
       newData.playerDATA[sourceIndex].location = destCell;
       console.log(newData);
@@ -82,14 +83,14 @@ export const StateProvider = ({ children }) => {
 
     //droppin in same cell: result - rearange
     if (source.droppableId !== destination.droppableId) {
-      const sourceCell = newData.cellDATA[displayed_board].cells.findIndex(
+      const sourceCell = newData.cellDATA[board_row][board_column].cells.findIndex(
         (cell) => cell.id === source.droppableId
       );
 
-      const [moving] = newData.cellDATA[board_column][board_row][
+      const [moving] = newData.cellDATA[board_row][board_column][
         sourceCell
       ].content.splice(source.index, 1);
-      newData.cellDATA[board_column][board_row][destCell].content.splice(
+      newData.cellDATA[board_row][board_column][destCell].content.splice(
         destIndex,
         0,
         moving

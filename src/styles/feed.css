@@ -2,7 +2,7 @@
 
 .feed {
   display: flex;
-  background-color: rgb(226, 226, 226);
+  background-color: #d8e0d2;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;

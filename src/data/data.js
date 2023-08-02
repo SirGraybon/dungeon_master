@@ -10,8 +10,8 @@ import grass from "../assets/terrain/grass.png"
 import dirt from "../assets/terrain/dirt.png"
 
 
-const data = {
-  playerDATA: [
+// const data = {
+  export const playerDATA = [
     {
       id: 1,
       characterName: "Bim",
@@ -87,17 +87,17 @@ const data = {
       },
       equipment: {head:{}, torso: {}, belt: {}, legs: {}, gloves: {}, right: {}, boots: {}, amulet: {}, left: {}, ring: {}}
     },
-  ],
+  ]
 
-  cellDATA:[]
-};
+   export const cellDATA = []
+// };
 const rows = 21
 const columns = 21
 
 for (let y = 0; y < rows; y++){
-  data.cellDATA.push([])
+  cellDATA.push([])
   for (let x = 0; x < columns; x++){
-    data.cellDATA[y].push([])
+    cellDATA[y].push([])
   }
 }
 
@@ -109,8 +109,7 @@ for (let i = 0; i < 400; i++) {
     background = grass
   }
 
-  data.cellDATA[10][10].push({ id: `${i}`, content: [], background });
+  cellDATA[10][10].push({ id: `${i}`, content: [], background });
 }
 
 
-export default data;

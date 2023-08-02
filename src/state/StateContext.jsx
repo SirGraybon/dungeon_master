@@ -53,8 +53,9 @@ export const StateProvider = ({ children }) => {
     const board_column = state.board_column;
     const { source, destination, type } = results;
     if (!destination) return;
-    const newData = { ...state.data };
-    const destCell = newData.cellDATA[board_row][board_column].findIndex(
+    const players =  [...state.players] ;
+    const cells =  [...state.cells] ;
+    const destCell = cells[board_row][board_column].findIndex(
       (cell) => cell.id === destination.droppableId
     );
     console.log(destCell)
@@ -65,45 +66,45 @@ export const StateProvider = ({ children }) => {
       destination.droppableId !== "source" &&
       source.droppableId === "source"
     ) {
-      const sourceIndex = newData.playerDATA.findIndex(
+      const sourceIndex = players.findIndex(
         (player) => player.characterName === results.draggableId
       );
       console.log(sourceIndex);
-      const currentLocation = newData.playerDATA[sourceIndex].location;
+      const currentLocation = players[sourceIndex].location;
 
-      const token = newData.playerDATA[source.index];
-      newData.cellDATA[board_row][board_column][destCell].content.push(token);
+      const token = players[source.index];
+      cells[board_row][board_column][destCell].content.push(token);
       if (currentLocation > 0) {
-        newData.cellDATA[board_row][board_column][currentLocation].content = [];
+        cells[board_row][board_column][currentLocation].content = [];
       }
-      newData.playerDATA[sourceIndex].location = destCell;
-      console.log(newData);
-      return dispatch({ type: "UPDATE_DATA", payload: newData });
+      players[sourceIndex].location = destCell;
+      return dispatch({ type: "UPDATE_DATA", players, cells  });
     }
 
     //droppin in same cell: result - rearange
     if (source.droppableId !== destination.droppableId) {
-      const sourceCell = newData.cellDATA[board_row][board_column].cells.findIndex(
+      const sourceCell = cells[board_row][board_column].cells.findIndex(
         (cell) => cell.id === source.droppableId
       );
 
-      const [moving] = newData.cellDATA[board_row][board_column][
+      const [moving] = cells[board_row][board_column][
         sourceCell
       ].content.splice(source.index, 1);
-      newData.cellDATA[board_row][board_column][destCell].content.splice(
+      cells[board_row][board_column][destCell].content.splice(
         destIndex,
         0,
         moving
       );
 
-      return dispatch({ type: "UPDATE_DATA", payload: newData });
+      return dispatch({ type: "UPDATE_DATA", players, cells });
     }
   };
   ////////////////////DRAG AND DROP EQUIPMENT////////////////////////////////////////////////////////////
   const handleEquip = function (results) {
-    const newData = { ...state.data };
+    const players =  [...state.players] ;
+    const cells =  [...state.cells] ;
     const selectedPlayer = state.selectedPlayer;
-    const selectedPlayerIndex = newData.playerDATA.findIndex(
+    const selectedPlayerIndex = players.findIndex(
       (player) => player.id === selectedPlayer.id
     );
 
@@ -117,13 +118,13 @@ export const StateProvider = ({ children }) => {
     ////////////////////////////////////////UNEQUIP ITEM////////////////////////////////////////////////////////////
     if (results.destination.droppableId === "inventory") {
       const prevItem =
-        newData.playerDATA[selectedPlayerIndex].equipment[
+      players[selectedPlayerIndex].equipment[
           results.source.droppableId
         ][0];
       selectedPlayer.player_inventory.push(prevItem);
       selectedPlayer.equipment[results.source.droppableId].pop();
-      newData.playerDATA[selectedPlayerIndex] = selectedPlayer;
-      return dispatch({ type: "UPDATE_DATA", payload: newData });
+      players[selectedPlayerIndex] = selectedPlayer;
+      return dispatch({ type: "UPDATE_DATA", players, cells });
     }
     ////////////////////////////////////////EQUIP ITEM////////////////////////////////////////////////////////////
     if (
@@ -131,30 +132,30 @@ export const StateProvider = ({ children }) => {
       selectedPlayer.equipment[results.destination.droppableId].length < 1
     ) {
       const newItem =
-        newData.playerDATA[selectedPlayerIndex].player_inventory[
+      players[selectedPlayerIndex].player_inventory[
           results.source.index
         ];
       selectedPlayer.equipment[results.destination.droppableId].push(newItem);
       selectedPlayer.player_inventory.splice(results.source.index, 1);
-      newData.playerDATA[selectedPlayerIndex] = selectedPlayer;
-      return dispatch({ type: "UPDATE_DATA", payload: newData });
+      players[selectedPlayerIndex] = selectedPlayer;
+      return dispatch({ type: "UPDATE_DATA", players, cells });
     }
     ////////////////////////////////////////SWAP ITEM////////////////////////////////////////////////////////////
     if (results.source.droppableId === "inventory") {
       const newItem =
-        newData.playerDATA[selectedPlayerIndex].player_inventory[
+      players[selectedPlayerIndex].player_inventory[
           results.source.index
         ];
       const prevItem =
-        newData.playerDATA[selectedPlayerIndex].equipment[
+      players[selectedPlayerIndex].equipment[
           results.destination.droppableId
         ][0];
       selectedPlayer.player_inventory.push(prevItem);
       selectedPlayer.equipment[results.destination.droppableId].pop();
       selectedPlayer.equipment[results.destination.droppableId].push(newItem);
       selectedPlayer.player_inventory.splice(results.source.index, 1);
-      newData.playerDATA[selectedPlayerIndex] = selectedPlayer;
-      return dispatch({ type: "UPDATE_DATA", payload: newData });
+      players[selectedPlayerIndex] = selectedPlayer;
+      return dispatch({ type: "UPDATE_DATA", players, cells });
     }
   };
 
@@ -185,7 +186,7 @@ export const StateProvider = ({ children }) => {
     }
     console.log("row: " + row, "Column: "+ column)
     // !state.data.cellDATA[row] && dispatch({type: "NEW_ROW"})
-    state.data.cellDATA[row][column].length < 1 && dispatch({type: "POPULATE_MAP", row, column})
+    state.cells[row][column].length < 1 && dispatch({type: "POPULATE_MAP", row, column})
 
 
 
@@ -222,6 +223,8 @@ export const StateProvider = ({ children }) => {
     moveBoard,
     state,
     data: state.data,
+    players: state.players,
+    cells: state.cells,
     display: state.display,
     selectedPlayer: state.selectedPlayer,
     feed: state.feed,

@@ -1,11 +1,12 @@
 .board {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  background-color: rgba(133, 66, 7, 0.303);
+  background-color: #d8e0d2;
   height: auto;
   width: auto;
   margin: 2px;
   border-radius: 15px;
+  padding: 15px;
   overflow: hidden;
 }
 .cell {
@@ -42,22 +43,32 @@
 .verticalPartition {
   width: 1px;
 
- /* overflow: visible;  */
+  /* overflow: visible;  */
 }
 .boardMoveButtonVertical {
+  display: flex;
+  font-size: 20pt;
+  font-weight: bold;
   height: 200px;
   width: 30px;
   cursor: pointer;
-  background-color: rgb(164, 95, 5);
-  border-radius: 15px;
+  background-color: #d3cb3a;
+  border-radius: 20px;
   align-self: center;
+  align-items: center;
+  justify-content: center;
 }
 .boardMoveButtonHorizontal {
+  display: flex;
   height: 30px;
   width: 200px;
+  font-size: 20pt;
+  font-weight: bold;
   cursor: pointer;
   border-radius: 15px;
-  background-color: rgb(164, 95, 5);
+  background-color: #d3cb3a;
   justify-self: center;
-  margin: 0 auto
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
 }

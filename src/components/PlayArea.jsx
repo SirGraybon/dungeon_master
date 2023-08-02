@@ -17,13 +17,13 @@ const PlayArea = function (props) {
     <DragDropContext onDragEnd={handleDrag}>
       <div className="playArea">
         <Feed />
-        <div className="boardMoveButtonVertical" onClick={() => handleClick("left")}></div>
+        <div className="boardMoveButtonVertical" onClick={() => handleClick("left")}>◁</div>
         <div>
-          <div className="boardMoveButtonHorizontal" onClick={() => handleClick("up")}></div>
+          <div className="boardMoveButtonHorizontal" onClick={() => handleClick("up")}>△</div>
           <Board />
-          <div className="boardMoveButtonHorizontal" onClick={() => handleClick("down")}></div>
+          <div className="boardMoveButtonHorizontal" onClick={() => handleClick("down")}>▽</div>
         </div>
-        <div className="boardMoveButtonVertical" onClick={() => handleClick("right")}></div>
+        <div className="boardMoveButtonVertical" onClick={() => handleClick("right")}>▷</div>
         <InformationCenter />
       </div>
     </DragDropContext>

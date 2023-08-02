@@ -7,12 +7,12 @@ import "../App.css"
 import MiniMap from "./MiniMap";
 
 export default function InformationCenter() {
-  const { data, display, setDisplay } = shareState();
+  const { players, cells, display, setDisplay } = shareState();
 
   return (
     <div className="information_center">
       <div className="source">
-        {data.playerDATA.map((player, index) => {
+        {players.map((player, index) => {
           return (
             <div className="playerCard" key={player.name}>
               <Droppable

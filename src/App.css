@@ -1,3 +1,7 @@
+html {
+  background-color: #e8ebf2;
+
+}
 #root {
   /* max-width: 1280px; */
   margin: 0 auto;
@@ -10,6 +14,9 @@
 
 .playArea {
   display: flex;
+  background-color: #e7e7dc;
+  padding: 3px;
+  border-radius: 15px;
 }
 /* .board {
   display: grid;
@@ -103,7 +110,7 @@
   justify-content: flex-start;
   width: 750px;
   height: 500px;
-  background-color: rgb(226, 226, 226);
+  background-color: #d8e0d2;
   margin: 2px;
   border-radius: 15px;
 }
@@ -113,14 +120,13 @@
   width: 90%;
   height: 65px;
   border-radius: 5px;
-  background-color: rgb(214, 47, 47);
+  background-color: rgb(255, 255, 255);
   /* margin: 5px; */
 }
 .tokenArea {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: aqua;
   height: 50px;
   width: 50px;
   /* overflow: hidden; */
@@ -135,14 +141,12 @@
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-  background-color: aqua;
   width: 200px;
   
 }
 .playerStatus {
   display: flex;
   flex-direction: column;
-  background-color: aqua;
   width: auto;
   
 }

@@ -3,11 +3,12 @@ import "../styles/miniMap.css";
 import React from "react";
 
 const MiniMap = function () {
-  const { data, board_column, board_row } = shareState();
-  const minimap = data.cellDATA;
+  const { cells, board_column, board_row } = shareState();
+  console.log(cells)
+  const minimap = cells;
   return (
     <div className="minimapComponent">
-      {minimap.map((row, index) => {
+      {cells.map((row, index) => {
         const rowIndex = index
         return (
           <div className="minimapRow">

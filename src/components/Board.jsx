@@ -6,11 +6,10 @@ import dirt from "../assets/terrain/dirt.png"
 import wall from "../assets/terrain/wall.png"
 
 export default function Board() {
-  const { data, handleDrag, display, setDisplay, editTerrain, board_row, board_column } = shareState();
+  const { cells, players, handleDrag, display, setDisplay, editTerrain, board_row, board_column } = shareState();
   return (
     <div className="board">
-      {console.log(data.cellDATA[board_row][board_column])}
-      {data.cellDATA[board_row][board_column].map((cell, index) => {
+      {cells[board_row][board_column].map((cell, index) => {
         return (
           <div>
             <div className="horizontalPartition"></div>
@@ -51,6 +50,7 @@ export default function Board() {
                       );
                     })}
                     {/* {provided.placeholder} */}
+                    {cell.id}
                   </div>
                 )}
               </Droppable>

@@ -1,6 +1,6 @@
 .diceBowlComponent {
   display: flex;
-  background-color: aquamarine;
+  background-color: #d8e0d2;
   flex-direction: column;
   justify-content: space-between;
   width: 750px;

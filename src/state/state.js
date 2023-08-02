@@ -1,13 +1,15 @@
 ////////////////////IMPORTs ////////////////////////////////////////////////////////////
 import React, { useReducer } from "react";
-import data from "../data/data";
+import { playerDATA, cellDATA } from "../data/data";
 import grass from "../assets/terrain/grass.png";
 import dirt from "../assets/terrain/dirt.png";
 import shareState from "./StateContext";
 
 // const StateHook = function () {
 export const defaultState = {
-  data: data,
+  // data: data,
+  players: playerDATA,
+  cells: cellDATA,
   board_column: 10,
   board_row: 10,
   selectedPlayer: "diceBowl",
@@ -61,7 +63,7 @@ export const reducer = function (state, action) {
         dice: action.payload,
       };
     }
-    
+
     case "ROLL_DIE": {
       return {
         ...state,
@@ -70,10 +72,10 @@ export const reducer = function (state, action) {
     }
     ////////////////////DATA////////////////////////////////////////////////////////////
     case "UPDATE_DATA": {
-      console.log(action.payload);
       return {
         ...state,
-        data: action.payload,
+        players: action.players,
+        cells: action.cells,
       };
     }
     ////////////////////DISPLAY////////////////////////////////////////////////////////////
@@ -91,16 +93,15 @@ export const reducer = function (state, action) {
       };
     }
     ////////////////////TERRAIN////////////////////////////////////////////////////////////
-    
+
     case "EDIT_TERRAIN": {
-      const newData = { ...state.data };
-      newData.cellDATA[state.board_row][state.board_column][
-        action.payload
-      ].background = state.terrainBrush;
-      
+      const newCells = { ...state.cells };
+      newCells[state.board_row][state.board_column][action.payload].background =
+        state.terrainBrush;
+
       return {
         ...state,
-        data: newData,
+        cells: newCells,
       };
     }
     case "SET_TERRAIN_BRUSH": {
@@ -111,9 +112,9 @@ export const reducer = function (state, action) {
     case "MOVE_BOARD": {
       return { ...state, board_row: action.row, board_column: action.column };
     }
-    
+
     case "POPULATE_MAP": {
-      const newData = { ...state.data };
+      const newCells = [ ...state.cells] ;
       for (let i = 0; i < 400; i++) {
         for (let i = 0; i < 400; i++) {
           const roll = Math.floor(Math.random() * 10) + 1;
@@ -121,20 +122,20 @@ export const reducer = function (state, action) {
           if (roll > 1) {
             background = grass;
           }
-          newData.cellDATA[action.row][action.column].push({
+          newCells[action.row][action.column].push({
             id: `${i}`,
             content: [],
             background,
           });
         }
         // console.log(newData.cellDATA)
-        return { ...state, data: newData };
+        return { ...state, cells: newCells, };
       }
     }
     ////////////////////FEED////////////////////////////////////////////////////////////
     case "POST_MESSAGE": {
       updateDateTime();
-      
+
       const dateStamp = `${months[month]}, ${day} ${year}`;
       const timeStamp = `${hours}:${min}:${sec}`;
       const currentFeed = [...state.feed];
@@ -146,7 +147,7 @@ export const reducer = function (state, action) {
       };
       const todayIndex = currentFeed.findIndex(
         (item) => item.day === dateStamp
-        );
+      );
       console.log(todayIndex);
       if (todayIndex === -1) {
         currentFeed.push({ day: dateStamp, feed: [feedUpdate] });

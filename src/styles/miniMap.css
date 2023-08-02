@@ -1,6 +1,6 @@
 .minimapComponent {
   display: flex;
-  background-color: aquamarine;
+  background-color: #d8e0d2;
   flex-direction: column;
   width: 750px;
   height: 420px;
@@ -12,21 +12,21 @@
   margin: 1px;
   height: 15px;
   width: 15px;;
-  background-color: brown;
+  background-color: #acb8a2;
 }
 .minimapCellCurrent{
   
   /* margin: 1px; */
   height: 16px;
   width: 16px;;
-  background-color: rgb(203, 149, 34);
+  background-color: #d3cb3a;
 }
 .minimapCellUnexplored{
   
   margin: 1px;
   height: 15px;;
   width: 15px;;
-  background-color: lightblue;
+  /* background-color: lightblue; */
 }
 .minimapRow{
   display: flex;

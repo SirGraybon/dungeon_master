@@ -48,6 +48,30 @@ export const StateProvider = ({ children }) => {
 
   ////////////////////DRAG AND DROP FUNCTIONs////////////////////////////////////////////////////////////
   ////////////////////DRAG AND DROP BOARD////////////////////////////////////////////////////////////
+  ////////////////////onDRAG START////////////////////////////////////////////////////////////
+  const calculateDrop = function(results){
+    if (results.droppableId !== "source"){
+
+      let allowedCells = []
+      const cellID = results.source.droppableId
+      for (let i = 0; i < 3; i++){
+        allowedCells.push(cellID + i)
+      allowedCells.push(cellID - i)
+      allowedCells.push(cellID + 20 + i)
+      allowedCells.push(cellID + 20 - i)
+      allowedCells.push(cellID - 20 + i)
+      allowedCells.push(cellID - 20 - i)
+      allowedCells.push(cellID + 40 + i)
+      allowedCells.push(cellID + 40 - i)
+      allowedCells.push(cellID - 40 + i)
+      allowedCells.push(cellID - 40 - i)
+      
+    }
+    dispatch({type:"CHECK_DROP_ALLOWED", payload: allowedCells})
+  }
+
+  }
+  ////////////////////onDRAG END////////////////////////////////////////////////////////////
   const handleDrag = function (results) {
     const board_row = state.board_row;
     const board_column = state.board_column;
@@ -58,7 +82,7 @@ export const StateProvider = ({ children }) => {
     const destCell = cells[board_row][board_column].findIndex(
       (cell) => cell.id === destination.droppableId
     );
-    console.log(destCell)
+
     const destIndex = destination.index;
 
     //dropping in play from source: result - add to play area
@@ -69,9 +93,9 @@ export const StateProvider = ({ children }) => {
       const sourceIndex = players.findIndex(
         (player) => player.characterName === results.draggableId
       );
-      console.log(sourceIndex);
+      
       const currentLocation = players[sourceIndex].location;
-
+      
       const token = players[source.index];
       cells[board_row][board_column][destCell].content.push(token);
       if (currentLocation > 0) {
@@ -80,21 +104,26 @@ export const StateProvider = ({ children }) => {
       players[sourceIndex].location = destCell;
       return dispatch({ type: "UPDATE_DATA", players, cells  });
     }
-
+    
     //droppin in same cell: result - rearange
     if (source.droppableId !== destination.droppableId) {
-      const sourceCell = cells[board_row][board_column].cells.findIndex(
+      const sourceCell = cells[board_row][board_column].findIndex(
         (cell) => cell.id === source.droppableId
-      );
+        );
+        const sourceIndex = players.findIndex(
+          (player) => player.characterName === results.draggableId
+        );
+        
+        const [moving] = cells[board_row][board_column][
+          sourceCell
+        ].content.splice(source.index, 1);
+        cells[board_row][board_column][destCell].content.splice(
+          destIndex,
+          0,
+          moving
+          );
+          players[sourceIndex].location = destCell;
 
-      const [moving] = cells[board_row][board_column][
-        sourceCell
-      ].content.splice(source.index, 1);
-      cells[board_row][board_column][destCell].content.splice(
-        destIndex,
-        0,
-        moving
-      );
 
       return dispatch({ type: "UPDATE_DATA", players, cells });
     }
@@ -108,9 +137,6 @@ export const StateProvider = ({ children }) => {
       (player) => player.id === selectedPlayer.id
     );
 
-    console.log(selectedPlayer);
-    console.log(selectedPlayerIndex);
-    console.log(results);
 
     if (results.destination === null) {
       return;
@@ -184,7 +210,6 @@ export const StateProvider = ({ children }) => {
     if(row < 0 || column < 0 || row > 20 || column > 20){
       return
     }
-    console.log("row: " + row, "Column: "+ column)
     // !state.data.cellDATA[row] && dispatch({type: "NEW_ROW"})
     state.cells[row][column].length < 1 && dispatch({type: "POPULATE_MAP", row, column})
 
@@ -221,8 +246,8 @@ export const StateProvider = ({ children }) => {
     postMessage,
     handleEquip,
     moveBoard,
+    calculateDrop,
     state,
-    data: state.data,
     players: state.players,
     cells: state.cells,
     display: state.display,
@@ -231,6 +256,7 @@ export const StateProvider = ({ children }) => {
     terrainOptions: state.terrainOptions,
     board_column: state.board_column,
     board_row: state.board_row,
+    droppableCells: state.droppableCells
   };
 
   return (

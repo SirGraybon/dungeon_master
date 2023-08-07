@@ -14,7 +14,6 @@ const Equipment = function () {
   const { selectedPlayer, handleEquip } = shareState();
 
   const handleClick = function (selection) {
-    console.log(selectedPlayer.equipment[equipCat]);
     setEquipCat(selection);
   };
   return (

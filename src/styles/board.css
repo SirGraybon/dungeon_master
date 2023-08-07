@@ -22,6 +22,18 @@
   border-radius: 3px;
   overflow: hidden;
 }
+.droppableCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  transition: 0.2s;
+  background-size: calc(100);
+  border-radius: 3px;
+  overflow: hidden;
+  border: solid;
+}
 /* .cell:hover {
   display: flex;
   align-items: center;

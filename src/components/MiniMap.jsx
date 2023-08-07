@@ -4,7 +4,7 @@ import React from "react";
 
 const MiniMap = function () {
   const { cells, board_column, board_row } = shareState();
-  console.log(cells)
+  
   const minimap = cells;
   return (
     <div className="minimapComponent">

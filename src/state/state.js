@@ -19,6 +19,7 @@ export const defaultState = {
   terrainOptions: [grass, dirt],
   terrainBrush: null,
   user: "DungeonMaster",
+  droppableCells: []
 };
 
 ////////////////////DATE / TIME VARIABLEs////////////////////////////////////////////////////////////
@@ -128,7 +129,7 @@ export const reducer = function (state, action) {
             background,
           });
         }
-        // console.log(newData.cellDATA)
+
         return { ...state, cells: newCells, };
       }
     }
@@ -147,19 +148,26 @@ export const reducer = function (state, action) {
       };
       const todayIndex = currentFeed.findIndex(
         (item) => item.day === dateStamp
-      );
-      console.log(todayIndex);
-      if (todayIndex === -1) {
-        currentFeed.push({ day: dateStamp, feed: [feedUpdate] });
-      } else {
-        currentFeed[todayIndex].feed.push(feedUpdate);
+        );
+
+        if (todayIndex === -1) {
+          currentFeed.push({ day: dateStamp, feed: [feedUpdate] });
+        } else {
+          currentFeed[todayIndex].feed.push(feedUpdate);
+        }
+        return {
+          ...state,
+          feed: currentFeed,
+        };
       }
-      return {
-        ...state,
-        feed: currentFeed,
-      };
+      ////////////////////CHECK DROP ALLOWED////////////////////////////////////////////////////////////
+  case "CHEC_DROP_ALLOWED": {
+    return{
+      ...state,
+      droppableCells: action.payload
     }
   }
+    }
 };
 
 export default reducer;

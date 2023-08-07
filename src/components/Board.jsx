@@ -6,7 +6,7 @@ import dirt from "../assets/terrain/dirt.png"
 import wall from "../assets/terrain/wall.png"
 
 export default function Board() {
-  const { cells, players, handleDrag, display, setDisplay, editTerrain, board_row, board_column } = shareState();
+  const { cells, players, handleDrag, display, setDisplay, editTerrain, board_row, board_column, droppableCells } = shareState();
   return (
     <div className="board">
       {cells[board_row][board_column].map((cell, index) => {
@@ -24,7 +24,7 @@ export default function Board() {
               >
                 {(provided) => (
                   <div
-                    className="cell"
+                    className={droppableCells.includes(cell.id) ? "droppableCell" : "cell"}
                     {...provided.droppableProps}
                     ref={provided.innerRef}
                     style={{backgroundImage: `url(${cell.background})`}}
@@ -49,7 +49,7 @@ export default function Board() {
                         </Draggable>
                       );
                     })}
-                    {/* {provided.placeholder} */}
+                    {provided.placeholder}
                     {cell.id}
                   </div>
                 )}

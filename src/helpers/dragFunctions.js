@@ -1,6 +1,6 @@
 //HandleDrag Function
 const handleDrag = function (results) {
-  console.log(results);
+  
   const { source, destination, type } = results;
   const newData = { ...data };
   const destCell = newData.cellDATA.findIndex(
@@ -16,7 +16,7 @@ const handleDrag = function (results) {
     const sourceIndex = newData.playerDATA.findIndex(
       (player) => player.characterName === results.draggableId
     );
-    console.log(sourceIndex);
+
     const currentLocation = newData.playerDATA[sourceIndex].location;
 
     const token = newData.playerDATA[source.index];
@@ -25,7 +25,7 @@ const handleDrag = function (results) {
       newData.cellDATA[currentLocation].content = [];
     }
     newData.playerDATA[sourceIndex].location = destCell;
-    console.log(newData);
+
     return setData(newData);
   }
 

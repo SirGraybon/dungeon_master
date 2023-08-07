@@ -7,14 +7,14 @@ import Feed from "./Feed";
 import "../styles/board.css"
 
 const PlayArea = function (props) {
-  const { handleDrag, moveBoard } = shareState();
+  const { handleDrag, moveBoard, calculateDrop } = shareState();
 
   const handleClick = function(direction){
     moveBoard(direction)
   }
 
   return (
-    <DragDropContext onDragEnd={handleDrag}>
+    <DragDropContext onDragEnd={handleDrag} >
       <div className="playArea">
         <Feed />
         <div className="boardMoveButtonVertical" onClick={() => handleClick("left")}>◁</div>

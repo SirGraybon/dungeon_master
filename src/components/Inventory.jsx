@@ -4,7 +4,7 @@ import shareState from "../state/StateContext";
 const Inventory = function() {
   const {selectedPlayer} = shareState()
   return(
-<DragDropContext onDragEnd={console.log("dragging")}>
+<DragDropContext >
         <Droppable droppableId="inventory" type="inventory">
           {(provided) => (
             <div

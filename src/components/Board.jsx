@@ -30,7 +30,7 @@ export default function Board() {
         initial="initial"
         exit="exit"
         className="board"
-        key={cells}
+        key={cells[board_row][board_column].id}
         >
         {cells[board_row][board_column].map((cell, index) => {
           return (

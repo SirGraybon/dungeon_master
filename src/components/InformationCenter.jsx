@@ -14,7 +14,7 @@ export default function InformationCenter() {
       <div className="source">
         {players.map((player, index) => {
           return (
-            <div className="playerCard" key={player.name}>
+            <div className="playerCard" key={player.characterName}>
               <Droppable
                 key={player.name}
                 droppableId="source"

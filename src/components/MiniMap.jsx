@@ -11,17 +11,17 @@ const MiniMap = function () {
       {cells.map((row, index) => {
         const rowIndex = index
         return (
-          <div className="minimapRow">
+          <div className="minimapRow" key={rowIndex}>
             {row.map((column, index) => {
               const columnIndex = index
               if (column.length > 1) {
                 if (rowIndex === board_row && columnIndex === board_column) {
-                  return <div className="minimapCellCurrent"></div>;
+                  return <div className="minimapCellCurrent" key={columnIndex}></div>;
                 }
 
-                return <div className="minimapCellExplored"></div>;
+                return <div className="minimapCellExplored" key={columnIndex}></div>;
               } else {
-                return <div className="minimapCellUnexplored"></div>;
+                return <div className="minimapCellUnexplored" key={columnIndex}></div>;
               }
             })}
           </div>

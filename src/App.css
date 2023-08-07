@@ -17,6 +17,7 @@ html {
   background-color: #e7e7dc;
   padding: 3px;
   border-radius: 15px;
+  overflow: hidden;
 }
 /* .board {
   display: grid;

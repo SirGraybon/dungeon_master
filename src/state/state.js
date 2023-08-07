@@ -49,9 +49,9 @@ const updateDateTime = function () {
   year = new Date().getFullYear(); //To get the Current Year
   month = new Date().getMonth() + 1; //To get the Current Month
   day = new Date().getDate(); //To get the Current Day
-  hours = new Date().getHours(); //To get the Current Hours
-  min = new Date().getMinutes(); //To get the Current Minutes
-  sec = new Date().getSeconds(); //To get the Current Secondsconsole.log(date)
+  hours = new Date().getHours().toFixed(.1); //To get the Current Hours
+  min = new Date().getMinutes().toFixed(.1); //To get the Current Minutes
+  sec = new Date().getSeconds().toFixed(.1); //To get the Current Secondsconsole.log(date)
 };
 
 ////////////////////REDUCER SWITCH CASEs////////////////////////////////////////////////////////////

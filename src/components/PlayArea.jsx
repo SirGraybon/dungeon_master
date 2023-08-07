@@ -51,7 +51,7 @@ const PlayArea = function (props) {
             △
           </div>
           
-            <div>
+            <div className="boardHolder">
               <Board />
             </div>
           

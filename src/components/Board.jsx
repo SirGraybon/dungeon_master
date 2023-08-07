@@ -8,63 +8,64 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const variants = {
   initial: {
-    x: 200,
+    x: 400,
     opacity: 0,
   },
   animate: {
     x: 0,
     opacity: 1,
   },
-  exit: {  opacity: 0 },
+  exit: { x:-200, opacity: 0.7 },
 };
 
 export default function Board() {
   const { cells, editTerrain, board_row, board_column, droppableCells } =
     shareState();
   return (
+    <>
     <AnimatePresence>
       <motion.div
         variants={variants}
         animate="animate"
         initial="initial"
-        // exit="exit"
+        exit="exit"
         className="board"
-        key={cells[board_row]}
-      >
+        key={cells}
+        >
         {cells[board_row][board_column].map((cell, index) => {
           return (
             <Droppable
-              droppableId={cell.id}
-              key={cell.id}
-              type="cell"
-              isDropDisabled={cell.content.length > 0}
+            droppableId={cell.id}
+            key={cell.id}
+            type="cell"
+            isDropDisabled={cell.content.length > 0}
             >
               {(provided) => (
                 <div
-                  className={
-                    droppableCells.includes(cell.id) ? "droppableCell" : "cell"
-                  }
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                  style={{ backgroundImage: `url(${cell.background})` }}
-                  onClick={() => editTerrain(index)}
+                className={
+                  droppableCells.includes(cell.id) ? "droppableCell" : "cell"
+                }
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+                style={{ backgroundImage: `url(${cell.background})` }}
+                onClick={() => editTerrain(index)}
                 >
                   {cell.content.map((player, index) => {
                     return (
                       <Draggable
-                        key={player.id}
+                      key={player.id}
                         draggableId={"playing" + player.characterName}
                         index={index}
-                      >
+                        >
                         {(provided) => (
                           <img
-                            src={player.avatar}
-                            className={player.class}
-                            {...provided.dragHandleProps}
-                            {...provided.draggableProps}
-                            ref={provided.innerRef}
+                          src={player.avatar}
+                          className={player.class}
+                          {...provided.dragHandleProps}
+                          {...provided.draggableProps}
+                          ref={provided.innerRef}
                           ></img>
-                        )}
+                          )}
                       </Draggable>
                     );
                   })}
@@ -77,5 +78,6 @@ export default function Board() {
         })}
       </motion.div>
     </AnimatePresence>
+        </>
   );
 }

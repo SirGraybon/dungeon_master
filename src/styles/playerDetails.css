@@ -15,7 +15,7 @@
   justify-content: space-between;
   width: 750px;
   margin: 2px;
-  height: 480px;
+  height: 420px;
 }
 .playerDetails {
   border-radius: 15px;
@@ -23,7 +23,7 @@
   display: flex;
   width: 100%;
   justify-content: space-between;
-  height: 500px;
+  height: 420px;
   background-color: #d8e0d2;
 }
 .playerDetailsSection {

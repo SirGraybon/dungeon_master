@@ -22,8 +22,8 @@ export default function Board() {
       console.log("initial" + direction);
       return {
         x:
-          (direction === "right" && 200) || (direction === "left" && -200) || 0,
-        y: (direction === "up" && -200) || (direction === "down" && 200) || 0,
+          (direction === "right" && 300) || (direction === "left" && -300) || 0,
+        y: (direction === "up" && -300) || (direction === "down" && 300) || 0,
         opacity: 0,
       };
     },
@@ -32,8 +32,9 @@ export default function Board() {
       y: 0,
       opacity: 1,
       transition: {
-        x: {type: "spring", stiffness: 300, dampping: 20},
-        opacity: {duration: 0.2,}
+        x: {type: "spring", stiffness: 100, dampping: 100},
+        y: {type: "spring", stiffness: 100, dampping: 50},
+        duration: 0.2
         
       },
     },
@@ -41,9 +42,13 @@ export default function Board() {
       console.log("exit" + direction);
       return {
         x:
-          (direction === "right" && -200) || (direction === "left" && 200) || 0,
-        y: (direction === "up" && 200) || (direction === "down" && -200) || 0,
+          (direction === "right" && -300) || (direction === "left" && 300) || 0,
+        y: (direction === "up" && 300) || (direction === "down" && -300) || 0,
         opacity: 0,
+        transition: {
+          duration: 0.1
+          
+        },
 
       };
     },
@@ -104,7 +109,7 @@ export default function Board() {
                       );
                     })}
                     {provided.placeholder}
-                    {cell.id}
+                    {/* {cell.id} */}
                   </div>
                 )}
               </Droppable>

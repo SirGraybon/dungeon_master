@@ -2,7 +2,12 @@
 import React, { useReducer } from "react";
 import { playerDATA, cellDATA } from "../data/data";
 import grass from "../assets/terrain/grass.png";
+import boulder from "../assets/terrain/boulder.png";
 import dirt from "../assets/terrain/dirt.png";
+import snow from "../assets/terrain/snow.png";
+import snow2 from "../assets/terrain/snow2.png";
+import sand1 from "../assets/terrain/sand1.png";
+import sand2 from "../assets/terrain/sand2.png";
 import shareState from "./StateContext";
 
 // const StateHook = function () {
@@ -120,11 +125,70 @@ export const reducer = function (state, action) {
       const newCells = [ ...state.cells] ;
       for (let i = 0; i < 400; i++) {
         for (let i = 0; i < 400; i++) {
-          const roll = Math.floor(Math.random() * 10) + 1;
-          let background = dirt;
-          if (roll > 1) {
-            background = grass;
+          let background = snow2;
+          if(action.row < 4) {
+
+            const roll = Math.floor(Math.random() * 10) + 1;
+            background = snow2;
+            if (roll > 1) {
+              background = snow;
+            }
           }
+          if(action.row === 4) {
+
+            const roll = Math.floor(Math.random() * 10) + 1;
+            background = snow;
+            if (roll > 7) {
+              background = grass;
+            }
+          }
+          if(action.row ===5) {
+
+            const roll = Math.floor(Math.random() * 10) + 1;
+            background = snow;
+            if (roll > 1) {
+              background = grass;
+            }
+          }
+          if(action.row > 5 && action.row < 15) {
+
+            const roll = Math.floor(Math.random() * 10) + 1;
+            background = dirt;
+            if (roll > 1) {
+              background = grass;
+            }
+          }
+          if(action.row === 15) {
+
+            const roll = Math.floor(Math.random() * 10) + 1;
+            background = sand1;
+            if (roll > 1) {
+              background = grass;
+            }
+          }
+          if(action.row === 16) {
+
+            const roll = Math.floor(Math.random() * 10) + 1;
+            background = sand1;
+            if (roll > 7) {
+              background = grass;
+            }
+          }
+          if(action.row > 16) {
+
+            const roll = Math.floor(Math.random() * 10) + 1;
+            background = sand2;
+            if (roll > 1) {
+              background = sand1;
+            }
+          }
+
+
+
+
+
+
+
           newCells[action.row][action.column].push({
             id: `${i}`,
             content: [],

@@ -6,78 +6,100 @@ import dirt from "../assets/terrain/dirt.png";
 import wall from "../assets/terrain/wall.png";
 import { motion, AnimatePresence } from "framer-motion";
 
-const variants = {
-  initial: {
-    x: 400,
-    opacity: 0,
-  },
-  animate: {
-    x: 0,
-    opacity: 1,
-  },
-  exit: { x:-200, opacity: 0.7 },
-};
-
 export default function Board() {
-  const { cells, editTerrain, board_row, board_column, droppableCells } =
-    shareState();
+  const {
+    cells,
+    editTerrain,
+    board_row,
+    board_column,
+    droppableCells,
+    boardDirectionAnimation,
+  } = shareState();
+  const indexLog = `${board_row} ${board_column}`;
+  const direction = boardDirectionAnimation;
+  const variants = {
+    initial: () => {
+      console.log("initial" + direction)
+      return {
+        x: direction === "right" ? 200 : -200,
+        y: 0,
+        opacity: 0,
+      };
+    },
+    animate: {
+      x: 0,
+      y: 0,
+      opacity: 1,
+    },
+    exit: () => {
+      console.log("exit" + direction)
+      return {
+        x: direction === "right" ? -200 : 200,
+        y: 0,
+        opacity: 0,
+      };
+    },
+  };
+
   return (
     <>
-    <AnimatePresence>
-      <motion.div
-        variants={variants}
-        animate="animate"
-        initial="initial"
-        exit="exit"
-        className="board"
-        key={cells[board_row][board_column].id}
+      <AnimatePresence initial={false} mode="wait" custom={direction} >
+        <motion.div
+          variants={variants}
+          animate="animate"
+          initial="initial"
+          exit="exit"
+          className="board"
+          key={indexLog}
         >
-        {cells[board_row][board_column].map((cell, index) => {
-          return (
-            <Droppable
-            droppableId={cell.id}
-            key={cell.id}
-            type="cell"
-            isDropDisabled={cell.content.length > 0}
-            >
-              {(provided) => (
-                <div
-                className={
-                  droppableCells.includes(cell.id) ? "droppableCell" : "cell"
-                }
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-                style={{ backgroundImage: `url(${cell.background})` }}
-                onClick={() => editTerrain(index)}
-                >
-                  {cell.content.map((player, index) => {
-                    return (
-                      <Draggable
-                      key={player.id}
-                        draggableId={"playing" + player.characterName}
-                        index={index}
+          {cells[board_row][board_column].map((cell, index) => {
+            return (
+              <Droppable
+                droppableId={cell.id}
+                key={cell.id}
+                type="cell"
+                isDropDisabled={cell.content.length > 0}
+              >
+                {(provided) => (
+                  <div
+                    className={
+                      droppableCells.includes(cell.id)
+                        ? "droppableCell"
+                        : "cell"
+                    }
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                    style={{ backgroundImage: `url(${cell.background})` }}
+                    onClick={() => editTerrain(index)}
+                  >
+                    {cell.content.map((player, index) => {
+                      return (
+                        <Draggable
+                          key={player.id}
+                          draggableId={"playing" + player.characterName}
+                          index={index}
                         >
-                        {(provided) => (
-                          <img
-                          src={player.avatar}
-                          className={player.class}
-                          {...provided.dragHandleProps}
-                          {...provided.draggableProps}
-                          ref={provided.innerRef}
-                          ></img>
+                          {(provided) => (
+                            <img
+                              src={player.avatar}
+                              className={player.class}
+                              {...provided.dragHandleProps}
+                              {...provided.draggableProps}
+                              ref={provided.innerRef}
+                            ></img>
                           )}
-                      </Draggable>
-                    );
-                  })}
-                  {provided.placeholder}
-                  {cell.id}
-                </div>
-              )}
-            </Droppable>
-          );
-        })}
-      </motion.div>
-    </AnimatePresence>
-        </>
+                        </Draggable>
+                      );
+                    })}
+                    {provided.placeholder}
+                    {cell.id}
+                  </div>
+                )}
+              </Droppable>
+            );
+          })}
+        </motion.div>
+      </AnimatePresence>
+    </>
   );
 }

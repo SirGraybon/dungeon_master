@@ -19,7 +19,9 @@ export const defaultState = {
   terrainOptions: [grass, dirt],
   terrainBrush: null,
   user: "DungeonMaster",
-  droppableCells: []
+  droppableCells: [],
+  boardDirectionAnimation: {}
+
 };
 
 ////////////////////DATE / TIME VARIABLEs////////////////////////////////////////////////////////////
@@ -111,7 +113,7 @@ export const reducer = function (state, action) {
     }
     ////////////////////MOVE BOARD////////////////////////////////////////////////////////////
     case "MOVE_BOARD": {
-      return { ...state, board_row: action.row, board_column: action.column };
+      return { ...state, board_row: action.row, board_column: action.column, boardDirectionAnimation: action.direction };
     }
 
     case "POPULATE_MAP": {

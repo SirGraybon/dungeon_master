@@ -49,36 +49,33 @@ export const StateProvider = ({ children }) => {
   ////////////////////DRAG AND DROP FUNCTIONs////////////////////////////////////////////////////////////
   ////////////////////DRAG AND DROP BOARD////////////////////////////////////////////////////////////
   ////////////////////onDRAG START////////////////////////////////////////////////////////////
-  const calculateDrop = function(results){
-    if (results.droppableId !== "source"){
-
-      let allowedCells = []
-      const cellID = results.source.droppableId
-      for (let i = 0; i < 3; i++){
-        allowedCells.push(cellID + i)
-      allowedCells.push(cellID - i)
-      allowedCells.push(cellID + 20 + i)
-      allowedCells.push(cellID + 20 - i)
-      allowedCells.push(cellID - 20 + i)
-      allowedCells.push(cellID - 20 - i)
-      allowedCells.push(cellID + 40 + i)
-      allowedCells.push(cellID + 40 - i)
-      allowedCells.push(cellID - 40 + i)
-      allowedCells.push(cellID - 40 - i)
-      
+  const calculateDrop = function (results) {
+    if (results.droppableId !== "source") {
+      let allowedCells = [];
+      const cellID = results.source.droppableId;
+      for (let i = 0; i < 3; i++) {
+        allowedCells.push(cellID + i);
+        allowedCells.push(cellID - i);
+        allowedCells.push(cellID + 20 + i);
+        allowedCells.push(cellID + 20 - i);
+        allowedCells.push(cellID - 20 + i);
+        allowedCells.push(cellID - 20 - i);
+        allowedCells.push(cellID + 40 + i);
+        allowedCells.push(cellID + 40 - i);
+        allowedCells.push(cellID - 40 + i);
+        allowedCells.push(cellID - 40 - i);
+      }
+      dispatch({ type: "CHECK_DROP_ALLOWED", payload: allowedCells });
     }
-    dispatch({type:"CHECK_DROP_ALLOWED", payload: allowedCells})
-  }
-
-  }
+  };
   ////////////////////onDRAG END////////////////////////////////////////////////////////////
   const handleDrag = function (results) {
     const board_row = state.board_row;
     const board_column = state.board_column;
     const { source, destination, type } = results;
     if (!destination) return;
-    const players =  [...state.players] ;
-    const cells =  [...state.cells] ;
+    const players = [...state.players];
+    const cells = [...state.cells];
     const destCell = cells[board_row][board_column].findIndex(
       (cell) => cell.id === destination.droppableId
     );
@@ -93,50 +90,48 @@ export const StateProvider = ({ children }) => {
       const sourceIndex = players.findIndex(
         (player) => player.characterName === results.draggableId
       );
-      
+
       const currentLocation = players[sourceIndex].location;
-      
+
       const token = players[source.index];
       cells[board_row][board_column][destCell].content.push(token);
       if (currentLocation > 0) {
         cells[board_row][board_column][currentLocation].content = [];
       }
       players[sourceIndex].location = destCell;
-      return dispatch({ type: "UPDATE_DATA", players, cells  });
+      return dispatch({ type: "UPDATE_DATA", players, cells });
     }
-    
+
     //droppin in same cell: result - rearange
     if (source.droppableId !== destination.droppableId) {
       const sourceCell = cells[board_row][board_column].findIndex(
         (cell) => cell.id === source.droppableId
-        );
-        const sourceIndex = players.findIndex(
-          (player) => player.characterName === results.draggableId
-        );
-        
-        const [moving] = cells[board_row][board_column][
-          sourceCell
-        ].content.splice(source.index, 1);
-        cells[board_row][board_column][destCell].content.splice(
-          destIndex,
-          0,
-          moving
-          );
-          players[sourceIndex].location = destCell;
+      );
+      const sourceIndex = players.findIndex(
+        (player) => player.characterName === results.draggableId
+      );
 
+      const [moving] = cells[board_row][board_column][
+        sourceCell
+      ].content.splice(source.index, 1);
+      cells[board_row][board_column][destCell].content.splice(
+        destIndex,
+        0,
+        moving
+      );
+      players[sourceIndex].location = destCell;
 
       return dispatch({ type: "UPDATE_DATA", players, cells });
     }
   };
   ////////////////////DRAG AND DROP EQUIPMENT////////////////////////////////////////////////////////////
   const handleEquip = function (results) {
-    const players =  [...state.players] ;
-    const cells =  [...state.cells] ;
+    const players = [...state.players];
+    const cells = [...state.cells];
     const selectedPlayer = state.selectedPlayer;
     const selectedPlayerIndex = players.findIndex(
       (player) => player.id === selectedPlayer.id
     );
-
 
     if (results.destination === null) {
       return;
@@ -144,9 +139,7 @@ export const StateProvider = ({ children }) => {
     ////////////////////////////////////////UNEQUIP ITEM////////////////////////////////////////////////////////////
     if (results.destination.droppableId === "inventory") {
       const prevItem =
-      players[selectedPlayerIndex].equipment[
-          results.source.droppableId
-        ][0];
+        players[selectedPlayerIndex].equipment[results.source.droppableId][0];
       selectedPlayer.player_inventory.push(prevItem);
       selectedPlayer.equipment[results.source.droppableId].pop();
       players[selectedPlayerIndex] = selectedPlayer;
@@ -158,9 +151,7 @@ export const StateProvider = ({ children }) => {
       selectedPlayer.equipment[results.destination.droppableId].length < 1
     ) {
       const newItem =
-      players[selectedPlayerIndex].player_inventory[
-          results.source.index
-        ];
+        players[selectedPlayerIndex].player_inventory[results.source.index];
       selectedPlayer.equipment[results.destination.droppableId].push(newItem);
       selectedPlayer.player_inventory.splice(results.source.index, 1);
       players[selectedPlayerIndex] = selectedPlayer;
@@ -169,11 +160,9 @@ export const StateProvider = ({ children }) => {
     ////////////////////////////////////////SWAP ITEM////////////////////////////////////////////////////////////
     if (results.source.droppableId === "inventory") {
       const newItem =
-      players[selectedPlayerIndex].player_inventory[
-          results.source.index
-        ];
+        players[selectedPlayerIndex].player_inventory[results.source.index];
       const prevItem =
-      players[selectedPlayerIndex].equipment[
+        players[selectedPlayerIndex].equipment[
           results.destination.droppableId
         ][0];
       selectedPlayer.player_inventory.push(prevItem);
@@ -195,6 +184,8 @@ export const StateProvider = ({ children }) => {
   const moveBoard = function (direction) {
     let row = state.board_row;
     let column = state.board_column;
+    dispatch({ type: "MOVE_BOARD", row, column, direction });
+
     if (direction === "right") {
       column++;
     }
@@ -207,17 +198,14 @@ export const StateProvider = ({ children }) => {
     if (direction === "down") {
       row++;
     }
-    if(row < 0 || column < 0 || row > 20 || column > 20){
-      return
+    if (row < 0 || column < 0 || row > 20 || column > 20) {
+      return;
     }
     // !state.data.cellDATA[row] && dispatch({type: "NEW_ROW"})
-    state.cells[row][column].length < 1 && dispatch({type: "POPULATE_MAP", row, column})
+    state.cells[row][column].length < 1 &&
+      dispatch({ type: "POPULATE_MAP", row, column });
 
-
-
-
-
-    dispatch({ type: "MOVE_BOARD", row, column });
+    dispatch({ type: "MOVE_BOARD", row, column, direction });
   };
   ////////////////////EDIT TERRAIN FUNCTIONs////////////////////////////////////////////////////////////
 
@@ -256,7 +244,8 @@ export const StateProvider = ({ children }) => {
     terrainOptions: state.terrainOptions,
     board_column: state.board_column,
     board_row: state.board_row,
-    droppableCells: state.droppableCells
+    droppableCells: state.droppableCells,
+    boardDirectionAnimation: state.boardDirectionAnimation,
   };
 
   return (

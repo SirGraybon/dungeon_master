@@ -19,10 +19,11 @@ export default function Board() {
   const direction = boardDirectionAnimation;
   const variants = {
     initial: () => {
-      console.log("initial" + direction)
+      console.log("initial" + direction);
       return {
-        x: direction === "right" ? 200 : -200,
-        y: 0,
+        x:
+          (direction === "right" && 200) || (direction === "left" && -200) || 0,
+        y: (direction === "up" && -200) || (direction === "down" && 200) || 0,
         opacity: 0,
       };
     },
@@ -30,20 +31,31 @@ export default function Board() {
       x: 0,
       y: 0,
       opacity: 1,
+      transition: {
+        x: {type: "spring", stiffness: 300, dampping: 20},
+        opacity: {duration: 0.2,}
+        
+      },
     },
-    exit: () => {
-      console.log("exit" + direction)
+    exit: (direction) => {
+      console.log("exit" + direction);
       return {
-        x: direction === "right" ? -200 : 200,
-        y: 0,
+        x:
+          (direction === "right" && -200) || (direction === "left" && 200) || 0,
+        y: (direction === "up" && 200) || (direction === "down" && -200) || 0,
         opacity: 0,
+
       };
     },
   };
 
   return (
     <>
-      <AnimatePresence initial={false} mode="wait" custom={direction} >
+      <AnimatePresence
+        initial={false}
+        mode="wait"
+        custom={direction}
+      >
         <motion.div
           variants={variants}
           animate="animate"

@@ -26,7 +26,10 @@
   width: 75px;
 }
 .equipmentSlot {
-  background-color: rgba(221, 142, 69, 0.852);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(174, 160, 148, 0.852);
   height: 50px;
   width: 50px;
   border: solid;

@@ -210,7 +210,8 @@ export const StateProvider = ({ children }) => {
   ////////////////////EDIT TERRAIN FUNCTIONs////////////////////////////////////////////////////////////
 
   const editTerrain = function (target) {
-    state.terrainBrush && dispatch({ type: "EDIT_TERRAIN", payload: target });
+    console.log(target)
+    state.terrainBrush && state.display === "terrain" && dispatch({ type: "EDIT_TERRAIN", payload: target });
   };
 
   const setTerrainBrush = function (option) {

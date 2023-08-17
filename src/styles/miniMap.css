@@ -1,5 +1,7 @@
 .minimapComponent {
   display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: #d8e0d2;
   flex-direction: column;
   width: 750px;
@@ -12,14 +14,14 @@
   margin: 1px;
   height: 15px;
   width: 15px;;
-  background-color: #acb8a2;
+  background-color: #52554f;
 }
 .minimapCellCurrent{
   
   /* margin: 1px; */
   height: 16px;
   width: 16px;;
-  background-color: #d3cb3a;
+  background-color: #e9a21f;
 }
 .minimapCellUnexplored{
   
@@ -34,4 +36,10 @@
 
   width: auto;
 
+}
+.map{
+  background-color: #e8cf8d;
+  padding: 6px;
+  border-radius: 15px;
+  
 }

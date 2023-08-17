@@ -21,7 +21,7 @@ export const defaultState = {
   display: "minimap",
   feed: [],
   dice: [],
-  terrainOptions: [grass, dirt],
+  terrainOptions: [grass, dirt, snow, snow2, sand1, sand2],
   terrainBrush: null,
   user: "DungeonMaster",
   droppableCells: [],
@@ -103,7 +103,7 @@ export const reducer = function (state, action) {
     ////////////////////TERRAIN////////////////////////////////////////////////////////////
 
     case "EDIT_TERRAIN": {
-      const newCells = { ...state.cells };
+      const newCells = [ ...state.cells] ;
       newCells[state.board_row][state.board_column][action.payload].background =
         state.terrainBrush;
 

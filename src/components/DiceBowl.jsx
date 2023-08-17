@@ -11,7 +11,8 @@ const DiceBowl = function (props) {
     <div className="diceBowlComponent">
       <div className="dice_options">
         <div className="dice_option" onClick={() => editDice(20)}>
-          20
+          <img className="dieIcon" src="../assets/icons/d20.png"/>
+        
         </div>
         <div className="dice_option" onClick={() => editDice(12)}>
           12

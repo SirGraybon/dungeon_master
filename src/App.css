@@ -98,8 +98,8 @@ html {
   /* margin: 5px; */
 }
 .token {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 25px;
   /* background-color: rgb(59, 159, 9); */
   /* margin: 5px; */
@@ -110,53 +110,3 @@ html {
 
 
 /* playerList */
-.source {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  width: 750px;
-  height: 500px;
-  background-color: #d8e0d2;
-  margin: 2px;
-  border-radius: 15px;
-}
-.playerCard {
-  display: flex;
-  margin:5px;
-  width: 90%;
-  height: 65px;
-  border-radius: 5px;
-  background-color: rgb(255, 255, 255);
-  /* margin: 5px; */
-}
-.tokenArea {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 50px;
-  width: 50px;
-  /* overflow: hidden; */
-}
-.infoArea {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  cursor: pointer;
-}
-.playerInfo {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-  width: 200px;
-  
-}
-.playerStatus {
-  display: flex;
-  flex-direction: column;
-  width: auto;
-  
-}
-.playerName {
-  margin: 0px;
-}

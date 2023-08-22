@@ -5,67 +5,14 @@ import PlayerDetails from "./PlayerDetails";
 import TerrainEditor from "./TerrainEditor";
 import "../App.css"
 import MiniMap from "./MiniMap";
+import PlayerList from "./PlayerList";
 
 export default function InformationCenter() {
   const { players, cells, display, setDisplay } = shareState();
 
   return (
     <div className="information_center">
-      <div className="source">
-        {players.map((player, index) => {
-          return (
-            <div className="playerCard" key={player.characterName}>
-              <Droppable
-                key={player.name}
-                droppableId="source"
-                type="cell"
-                isDropDisabled={true}
-              >
-                {(provided) => (
-                  <div
-                    className="tokenArea"
-                    key={player.characterName}
-                    {...provided.droppableProps}
-                    ref={provided.innerRef}
-                  >
-                    <Draggable
-                      key={player.characterName}
-                      draggableId={player.characterName}
-                      index={index}
-                    >
-                      {(provided) => (
-                        <img
-                          src={player.avatar}
-                          className={player.class}
-                          {...provided.dragHandleProps}
-                          {...provided.draggableProps}
-                          ref={provided.innerRef}
-                        ></img>
-                      )}
-                    </Draggable>
-
-                    {/* {provided.placeholder} */}
-                  </div>
-                )}
-              </Droppable>
-              <div
-                className="infoArea"
-                onClick={() => setDisplay("player", player)}
-              >
-                <div className="playerInfo">
-                  <p className="playerName">{player.characterName}</p>
-                  <p>{player.class}</p>
-                </div>
-                <div className="playerStatus">
-                  <h4>
-                    {player.current_health} / {player.max_health}
-                  </h4>
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+      <PlayerList/>
       <div className="option_bar">
         <button onClick={() => setDisplay("diceBowl", null)}> Dice Bowl</button>
         <button onClick={() => setDisplay("terrain", null)}> Terrain Editor</button>

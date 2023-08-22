@@ -3,7 +3,7 @@
   background-color: #d8e0d2;
   flex-direction: column;
   justify-content: space-between;
-  width: 750px;
+  width: 600px;
   height: 420px;
   margin: 2px;
 }
@@ -14,13 +14,13 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  width: 750px;
+  width: 600px;
   height: 60px;
   background-color: rgb(56, 135, 109);
   
 }
 .dice_option {
-  width: 120px;
+  width: 95px;
   height: 60px;
   background-color: rgb(227, 234, 232);
 }
@@ -28,7 +28,7 @@
 /* totla roll */
 
 .total_roll {
-width: 750px;
+width: 600px;
 height: 60px;
 background-color: beige;
 }

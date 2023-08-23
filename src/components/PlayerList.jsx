@@ -4,49 +4,25 @@ import "../styles/playerList.css";
 import { motion } from "framer-motion";
 
 export default function PlayerList() {
-  const { players, setDisplay } = shareState();
+  const { players, setDisplay, handleDrag } = shareState();
 
   return (
     <div className="source">
       {players.map((player, index) => {
         return (
           <div className="playerCard" key={player.characterName}>
-            <Droppable
-              key={player.name}
-              droppableId="source"
-              type="cell"
-              isDropDisabled={true}
-            >
-              {(provided) => (
-                <div
-                  className="tokenArea"
-                  key={player.characterName}
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                >
-                  <Draggable
-                    key={player.characterName}
-                    draggableId={player.characterName}
-                    index={index}
-                  >
-                    {(provided) => (
-                      <motion.img
-                        whileHover={{ scale: 1.2 }}
-                        dragSnapToOrigin
-                        src={player.avatar}
-                        className={player.class}
-                        {...provided.dragHandleProps}
-                        {...provided.draggableProps}
-                        drag
-                        ref={provided.innerRef}
-                      ></motion.img>
-                    )}
-                  </Draggable>
+            <div className="tokenArea" style={{backgroundImage: `url(${player.avatar})`}} key={player.characterName}>
+              <motion.img
+                whileHover={{ scale: 1.2 }}
+                whileDrag={{ borderRadius: 25}}
+                dragSnapToOrigin
+                src={player.avatar}
+                className={player.class}
+                drag
+                onDragEnd={handleDrag}
+              ></motion.img>
+            </div>
 
-                  {/* {provided.placeholder} */}
-                </div>
-              )}
-            </Droppable>
             <div
               className="infoArea"
               onClick={() => setDisplay("player", player)}

@@ -32,10 +32,9 @@ export default function Board() {
       y: 0,
       opacity: 1,
       transition: {
-        x: {type: "spring", stiffness: 100, dampping: 100},
-        y: {type: "spring", stiffness: 100, dampping: 50},
-        duration: 0.2
-        
+        x: { type: "spring", stiffness: 100, dampping: 100 },
+        y: { type: "spring", stiffness: 100, dampping: 50 },
+        duration: 0.2,
       },
     },
     exit: (direction) => {
@@ -46,21 +45,15 @@ export default function Board() {
         y: (direction === "up" && 300) || (direction === "down" && -300) || 0,
         opacity: 0,
         transition: {
-          duration: 0.1
-          
+          duration: 0.1,
         },
-
       };
     },
   };
 
   return (
     <>
-      <AnimatePresence
-        initial={false}
-        mode="wait"
-        custom={direction}
-      >
+      <AnimatePresence initial={false} mode="wait" custom={direction}>
         <motion.div
           variants={variants}
           animate="animate"
@@ -71,48 +64,23 @@ export default function Board() {
         >
           {cells[board_row][board_column].map((cell, index) => {
             return (
-              <Droppable
-                droppableId={cell.id}
-                key={cell.id}
-                type="cell"
-                isDropDisabled={cell.content.length > 0}
+              <div
+                className={
+                  droppableCells.includes(cell.id) ? "droppableCell" : "cell"
+                }
+                style={{ backgroundImage: `url(${cell.background})` }}
+                onClick={() => editTerrain(index)}
               >
-                {(provided) => (
-                  <div
-                    className={
-                      droppableCells.includes(cell.id)
-                        ? "droppableCell"
-                        : "cell"
-                    }
-                    {...provided.droppableProps}
-                    ref={provided.innerRef}
-                    style={{ backgroundImage: `url(${cell.background})` }}
-                    onClick={() => editTerrain(index)}
-                  >
-                    {cell.content.map((player, index) => {
-                      return (
-                        <Draggable
-                          key={player.id}
-                          draggableId={"playing" + player.characterName}
-                          index={index}
-                        >
-                          {(provided) => (
-                            <img
-                              src={player.avatar}
-                              className={player.class}
-                              {...provided.dragHandleProps}
-                              {...provided.draggableProps}
-                              ref={provided.innerRef}
-                            ></img>
-                          )}
-                        </Draggable>
-                      );
-                    })}
-                    {provided.placeholder}
-                    {/* {cell.id} */}
-                  </div>
-                )}
-              </Droppable>
+                {cell.content.map((player, index) => {
+                  return (
+                    <img
+                      src={player.avatar}
+                      className={player.class}
+
+                    ></img>
+                  );
+                })}
+              </div>
             );
           })}
         </motion.div>

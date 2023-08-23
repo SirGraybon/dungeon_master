@@ -86,7 +86,7 @@ html {
   
   width: 40px;
   height: 40px;
-  border-radius: 25px;
+  border-radius: 10;
   background-color: rgb(42, 118, 165);
   /* margin: 5px; */
 }

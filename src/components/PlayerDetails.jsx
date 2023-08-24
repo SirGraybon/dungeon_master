@@ -18,7 +18,7 @@ const PlayerDetails = function (props) {
     <div className="playerModal">
       <div className="playerDetails">
         <div className="playerDetailsSection">
-          <img className="avatar" src={selectedPlayer.avatar} alt="" />
+          <img className="avatar" src={selectedPlayer.avatar} style={{ backgroundColor: selectedPlayer.colour }} />
           <div>{selectedPlayer.characterName}</div>
           <div>
             Level {selectedPlayer.level} {selectedPlayer.class}

@@ -70,6 +70,7 @@ export const StateProvider = ({ children }) => {
   };
   ////////////////////onDRAG END////////////////////////////////////////////////////////////
   const handleDrag = function (results) {
+    console.log(results)
     const board_row = state.board_row;
     const board_column = state.board_column;
     const { source, destination, type } = results;
@@ -108,7 +109,7 @@ export const StateProvider = ({ children }) => {
         (cell) => cell.id === source.droppableId
       );
       const sourceIndex = players.findIndex(
-        (player) => player.characterName === results.draggableId
+        (player) => "playing" + player.characterName === results.draggableId
       );
 
       const [moving] = cells[board_row][board_column][

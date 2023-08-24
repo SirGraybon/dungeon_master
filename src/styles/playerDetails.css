@@ -37,6 +37,7 @@
 .avatar {
   height: 200px;
   width: 200px;
+  border-radius: 20px;
 }
 
 .inventory {
@@ -56,4 +57,11 @@
 .tabs {
   width: 100px;
   height: 100%;
+}
+
+.addCharacter {
+  height: 50px;
+  width: 50px;
+  background-color: black;
+  border-radius: 25px
 }

@@ -71,6 +71,7 @@ export default function PlayerList() {
           </div>
         );
       })}
+      <div className="addCharacter">+</div>
     </div>
   );
 }

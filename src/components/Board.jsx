@@ -32,10 +32,9 @@ export default function Board() {
       y: 0,
       opacity: 1,
       transition: {
-        x: {type: "spring", stiffness: 100, dampping: 100},
-        y: {type: "spring", stiffness: 100, dampping: 50},
-        duration: 0.2
-        
+        x: { type: "spring", stiffness: 100, dampping: 100 },
+        y: { type: "spring", stiffness: 100, dampping: 50 },
+        duration: 0.2,
       },
     },
     exit: (direction) => {
@@ -46,21 +45,15 @@ export default function Board() {
         y: (direction === "up" && 300) || (direction === "down" && -300) || 0,
         opacity: 0,
         transition: {
-          duration: 0.1
-          
+          duration: 0.1,
         },
-
       };
     },
   };
 
   return (
     <>
-      <AnimatePresence
-        initial={false}
-        mode="wait"
-        custom={direction}
-      >
+      <AnimatePresence initial={false} mode="wait" custom={direction}>
         <motion.div
           variants={variants}
           animate="animate"
@@ -97,16 +90,19 @@ export default function Board() {
                           index={index}
                         >
                           {(provided) => (
-                      <div
-                      className="token"
-                      
-                      // src={player.avatar}
-                      {...provided.dragHandleProps}
-                      {...provided.draggableProps}
-                      ref={provided.innerRef}
-                    >
-                      <img className="token" src={player.avatar} style={{ backgroundColor: player.colour }} />
-                    </div>
+                            <div
+                              className="token"
+                              onClick={()=> console.log("shazam")}
+                              {...provided.dragHandleProps}
+                              {...provided.draggableProps}
+                              ref={provided.innerRef}
+                            >
+                              <img
+                                className="token"
+                                src={player.avatar}
+                                style={{ backgroundColor: player.colour }}
+                              />
+                            </div>
                           )}
                         </Draggable>
                       );

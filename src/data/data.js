@@ -22,6 +22,7 @@ import dirt from "../assets/terrain/dirt.png"
       max_health: 100,
       current_health: 100,
       gold: 0,
+      colour: "#3874a3",
       player_inventory: [
         {item: "Health Potion", uses: 1, unitWeight: 15, qty: 1, get totalWeight() {this.totalWeight = this.unitWeight * this.qty } , token: placeHolder, description: "Heals user for 25HP"},
         {item: "Mana Potion", uses: 1, unitWeight: 15, qty: 1, get totalWeight() {this.totalWeight = this.unitWeight * this.qty } , token: placeHolder, description: "Replenishes 25MP"},
@@ -48,6 +49,7 @@ import dirt from "../assets/terrain/dirt.png"
       max_health: 100,
       current_health: 100,
       gold: 0,
+      colour: "#c84133",
       player_inventory: [
         {item: "Health Potion", item_type: "consumable", uses: 1, unitWeight: 15, qty: 1, get totalWeight() {this.totalWeight = this.unitWeight * this.qty } , token: placeHolder, description: "Heals user for 25HP"},
         {item: "metal helmet", item_type: "head", uses: 1, unitWeight: 15, qty: 1, get totalWeight() {this.totalWeight = this.unitWeight * this.qty } , token: helm, description: ""},
@@ -73,6 +75,7 @@ import dirt from "../assets/terrain/dirt.png"
       max_health: 100,
       current_health: 100,
       gold: 0,
+      colour: "#519b26",
       player_inventory: [
 
 

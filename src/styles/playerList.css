@@ -16,15 +16,28 @@
   height: 65px;
   border-radius: 5px;
   background-color: rgb(255, 255, 255);
+  align-items: center;
+  overflow: hidden;
   /* margin: 5px; */
 }
 .tokenArea {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50px;
-  width: 50px;
-  /* overflow: hidden; */
+  height: 65px;
+  width: 65px;
+  /* border-radius: 20px; */
+  overflow: hidden;
+}
+.outterTokenArea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 65px;
+  width: 65px;
+  overflow: hidden;
+  background-color: aliceblue;
+  margin-right: 5px;
 }
 .infoArea {
   display: flex;
@@ -37,6 +50,7 @@
   align-items: flex-start;
   flex-direction: column;
   width: 200px;
+
   
 }
 .playerStatus {
@@ -47,4 +61,34 @@
 }
 .playerName {
   margin: 0px;
+  padding: 0%;
+}
+
+.Warrior {
+  width: 40px;
+  height: 40px;
+  border-radius: 25px;
+  background-color: rgb(214, 47, 47);
+  /* margin: 5px; */
+}
+.Wizard {
+  
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  /* background-color: rgb(42, 118, 165); */
+  /* margin: 5px; */
+}
+.Rogue {
+  width: 50px;
+  height: 50px;
+  /* border-radius: 25px; */
+  background-color: rgb(59, 159, 9);
+  /* margin: 5px; */
+}
+.token {
+  width: 45px;
+  height: 45px;
+  border-radius: 25px;
+  /* margin: 5px; */
 }

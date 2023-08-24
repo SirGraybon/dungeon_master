@@ -97,13 +97,16 @@ export default function Board() {
                           index={index}
                         >
                           {(provided) => (
-                            <img
-                              src={player.avatar}
-                              className={player.class}
-                              {...provided.dragHandleProps}
-                              {...provided.draggableProps}
-                              ref={provided.innerRef}
-                            ></img>
+                      <div
+                      className="token"
+                      
+                      // src={player.avatar}
+                      {...provided.dragHandleProps}
+                      {...provided.draggableProps}
+                      ref={provided.innerRef}
+                    >
+                      <img className="token" src={player.avatar} style={{ backgroundColor: player.colour }} />
+                    </div>
                           )}
                         </Draggable>
                       );

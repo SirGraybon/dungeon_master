@@ -18,33 +18,40 @@ export default function PlayerList() {
               isDropDisabled={true}
             >
               {(provided) => (
-                <div
-                  className="tokenArea"
-                  key={player.characterName}
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
+                <div className="outterTokenArea">
+
+                <motion.div
+                className="tokenArea"
+                whileHover={{ borderRadius: 25, width: 50, height: 50 }}
+                style={{ backgroundColor: player.colour }}
+                key={player.characterName}
+                {...provided.droppableProps}
+                ref={provided.innerRef}
                 >
                   <Draggable
                     key={player.characterName}
                     draggableId={player.characterName}
                     index={index}
-                  >
+                    >
                     {(provided) => (
-                      <motion.img
-                        whileHover={{ scale: 1.2 }}
-                        dragSnapToOrigin
-                        src={player.avatar}
-                        className={player.class}
-                        {...provided.dragHandleProps}
-                        {...provided.draggableProps}
-                        drag
-                        ref={provided.innerRef}
-                      ></motion.img>
+                      <div
+                      className="token"
+                      {...provided.dragHandleProps}
+                      {...provided.draggableProps}
+                      ref={provided.innerRef}
+                      >
+                        <img
+                          className="token"
+                          src={player.avatar}
+                          style={{ backgroundColor: player.colour }}
+                          />
+                      </div>
                     )}
                   </Draggable>
 
                   {/* {provided.placeholder} */}
-                </div>
+                </motion.div>
+              </div>
               )}
             </Droppable>
             <div

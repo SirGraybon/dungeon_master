@@ -1,5 +1,4 @@
 ////////////////////IMPORTs ////////////////////////////////////////////////////////////
-import React, { useReducer } from "react";
 import { playerDATA, cellDATA } from "../data/data";
 import grass from "../assets/terrain/grass.png";
 import boulder from "../assets/terrain/boulder.png";
@@ -8,7 +7,6 @@ import snow from "../assets/terrain/snow.png";
 import snow2 from "../assets/terrain/snow2.png";
 import sand1 from "../assets/terrain/sand1.png";
 import sand2 from "../assets/terrain/sand2.png";
-import shareState from "./StateContext";
 
 // const StateHook = function () {
 export const defaultState = {
